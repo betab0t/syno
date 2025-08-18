@@ -1,0 +1,1266 @@
+{
+    "activate": {
+        "Default": false,
+        "ParamType": "bool",
+        "LegalValue": true,
+        "ConfigGroup": "Custom.Activated"
+    },
+    "image": {
+        "enhancement": {
+            "brightness": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "VideoSource.0.ISP.Brightness"
+            },
+            "contrast": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "VideoSource.0.ISP.Contrast"
+            },
+            "saturation": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "VideoSource.0.ISP.Saturation"
+            },
+            "sharpness": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "Custom.SmartCodec.TargetSharpness"
+            },
+            "ConfigGroup": "Custom.SmartCodec.TargetSharpness,VideoSource.0.ISP"
+        },
+        "hdr": {
+            "Default": false,
+            "ParamType": "bool",
+            "ConfigGroup": "VideoSource.0.ISP.HDREnabled"
+        },
+        "denoise_level": {
+            "Default": 50,
+            "ParamType": "int",
+            "LegalValue": "[0,100]",
+            "ConfigGroup": "Custom.SmartCodec.TargetDenoiseLevel"
+        },
+        "exposure": {
+            "mode": {
+                "Default": "auto_deflicker_60hz",
+                "ParamType": "string",
+                "LegalValue": [
+                    "manual",
+                    "auto_deflicker_50hz",
+                    "auto_deflicker_60hz",
+                    "outdoor"
+                ],
+                "ConfigGroup": "VideoSource.0.ISP.ExpMode"
+            },
+            "shutter_fixed": {
+                "Default": 30,
+                "ParamType": "int",
+                "LegalValue": "[30,16000]",
+                "ConfigGroup": "VideoSource.0.ISP.FixedShutterSpeed"
+            },
+            "gain_fixed": {
+                "Default": 100,
+                "ParamType": "int",
+                "LegalValue": "[100,819200]",
+                "ConfigGroup": "VideoSource.0.ISP.FixedGain"
+            },
+            "shutter_max": {
+                "Default": 16000,
+                "ParamType": "int",
+                "LegalValue": "[30,16000]",
+                "ConfigGroup": "VideoSource.0.ISP.MaxShutterSpeed"
+            },
+            "shutter_min": {
+                "Default": 30,
+                "ParamType": "int",
+                "LegalValue": "[30,16000]",
+                "ConfigGroup": "VideoSource.0.ISP.MinShutterSpeed"
+            },
+            "gain_max": {
+                "Default": 51200,
+                "ParamType": "int",
+                "LegalValue": "[100,819200]",
+                "ConfigGroup": "VideoSource.0.ISP.MaxGain"
+            },
+            "gain_min": {
+                "Default": 100,
+                "ParamType": "int",
+                "LegalValue": "[100,819200]",
+                "ConfigGroup": "VideoSource.0.ISP.MinGain"
+            },
+            "ConfigGroup": "Custom,VideoSource.0.ISP"
+        },
+        "day_night": {
+            "mode": {
+                "Default": "auto",
+                "ParamType": "string",
+                "LegalValue": [
+                    "auto",
+                    "day",
+                    "night",
+                    "schedule"
+                ],
+                "ConfigGroup": "Sensor.LightSensor.NightMode"
+            },
+            "day_night_schedule": {
+                "Default": "",
+                "ParamType": "string",
+                "ConfigGroup": "Sensor.LightSensor.ScheduleRules"
+            },
+            "ir_led": {
+                "intensity": {
+                    "Default": 50,
+                    "ParamType": "int",
+                    "LegalValue": "[0,100]",
+                    "ConfigGroup": "IRLED.Intensity"
+                },
+                "sensor": {
+                    "ReadOnly": true,
+                    "ParamType": "number",
+                    "ConfigGroup": "IRLED.Sensor"
+                },
+                "ConfigGroup": "IRLED"
+            },
+            "day_to_night": {
+                "Default": 32,
+                "ParamType": "number",
+                "LegalValue": "(0,65536]",
+                "ConfigGroup": "Sensor.LightSensor.DayToNightValue"
+            },
+            "night_to_day": {
+                "Default": 85,
+                "ParamType": "number",
+                "LegalValue": "(0,65536]",
+                "ConfigGroup": "Sensor.LightSensor.NightToDayValue"
+            },
+            "ConfigGroup": "Sensor.LightSensor,IRLED"
+        },
+        "white_balance": {
+            "mode": {
+                "Default": "auto",
+                "ParamType": "string",
+                "LegalValue": [
+                    "auto",
+                    "manual"
+                ],
+                "ConfigGroup": "Custom.WBMode"
+            },
+            "red": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "VideoSource.0.ISP.AWBRatioR"
+            },
+            "blue": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "VideoSource.0.ISP.AWBRatioB"
+            },
+            "Corrector": "WBMode",
+            "ConfigGroup": "VideoSource.0.ISP,Custom.WBMode"
+        },
+        "orientation": {
+            "flip": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Image.Flip"
+            },
+            "mirror": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Image.Mirror"
+            },
+            "rotate": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": [
+                    0,
+                    90,
+                    180,
+                    270
+                ],
+                "ConfigGroup": "VideoSource.0.Image.Rotate"
+            },
+            "ConfigGroup": "VideoSource.0.Image"
+        },
+        "osd": {
+            "datetime_enabled": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Overlay.Text.DateTimeEnabled"
+            },
+            "text_enabled": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Overlay.Text.TextEnabled"
+            },
+            "date_format": {
+                "Default": "YYYY/MM/DD",
+                "ParamType": "string",
+                "LegalValue": [
+                    "YYYY/MM/DD",
+                    "YY/MM/DD",
+                    "MM/DD/YYYY",
+                    "MM/DD/YY",
+                    "DD/MM/YYYY",
+                    "DD/MM/YY"
+                ],
+                "ConfigGroup": "VideoSource.0.Overlay.Text.DateFormat"
+            },
+            "time_format": {
+                "Default": 12,
+                "ParamType": "int",
+                "LegalValue": [
+                    12,
+                    24
+                ],
+                "ConfigGroup": "VideoSource.0.Overlay.Text.TimeFormat"
+            },
+            "text_content": {
+                "Default": "",
+                "AllowEmpty": true,
+                "LegalSize": 36,
+                "ParamType": "multi_lang",
+                "ConfigGroup": "VideoSource.0.Overlay.Text.Text"
+            },
+            "color": {
+                "Default": "white",
+                "ParamType": "string",
+                "LegalValue": [
+                    "white",
+                    "black"
+                ],
+                "ConfigGroup": "VideoSource.0.Overlay.Text.ColorSet"
+            },
+            "position": {
+                "Default": "left-top",
+                "ParamType": "string",
+                "LegalValue": [
+                    "left-top",
+                    "right-top",
+                    "left-bottom",
+                    "right-bottom"
+                ],
+                "ConfigGroup": "VideoSource.0.Overlay.Text.Position"
+            },
+            "ConfigGroup": "VideoSource.0.Overlay.Text"
+        },
+        "privacy_mask": {
+            "enabled": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.Enabled"
+            },
+            "0": {
+                "enabled": {
+                    "Default": false,
+                    "ParamType": "bool",
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0.Enabled"
+                },
+                "region": {
+                    "top": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0.Top"
+                    },
+                    "bottom": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0.Bottom"
+                    },
+                    "left": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0.Left"
+                    },
+                    "right": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0.Right"
+                    },
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0"
+                },
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.0"
+            },
+            "1": {
+                "enabled": {
+                    "Default": false,
+                    "ParamType": "bool",
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1.Enabled"
+                },
+                "region": {
+                    "top": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1.Top"
+                    },
+                    "bottom": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1.Bottom"
+                    },
+                    "left": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1.Left"
+                    },
+                    "right": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1.Right"
+                    },
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1"
+                },
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.1"
+            },
+            "2": {
+                "enabled": {
+                    "Default": false,
+                    "ParamType": "bool",
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2.Enabled"
+                },
+                "region": {
+                    "top": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2.Top"
+                    },
+                    "bottom": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2.Bottom"
+                    },
+                    "left": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2.Left"
+                    },
+                    "right": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2.Right"
+                    },
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2"
+                },
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.2"
+            },
+            "3": {
+                "enabled": {
+                    "Default": false,
+                    "ParamType": "bool",
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3.Enabled"
+                },
+                "region": {
+                    "top": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3.Top"
+                    },
+                    "bottom": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3.Bottom"
+                    },
+                    "left": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3.Left"
+                    },
+                    "right": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3.Right"
+                    },
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3"
+                },
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.3"
+            },
+            "4": {
+                "enabled": {
+                    "Default": false,
+                    "ParamType": "bool",
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4.Enabled"
+                },
+                "region": {
+                    "top": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4.Top"
+                    },
+                    "bottom": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4.Bottom"
+                    },
+                    "left": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4.Left"
+                    },
+                    "right": {
+                        "ParamType": "int",
+                        "LegalValue": "[0,10000]",
+                        "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4.Right"
+                    },
+                    "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4"
+                },
+                "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask.4"
+            },
+            "ConfigGroup": "VideoSource.0.Overlay.PrivacyMask"
+        },
+        "ConfigGroup": "Custom,Sensor.LightSensor,VideoSource.0,IRLED"
+    },
+    "streaming": {
+        "video": {
+            "0": {
+                "codec": {
+                    "Default": "H264",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "H264",
+                        "H265"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.Codec"
+                },
+                "resolution": {
+                    "Default": "2880x1620",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "1280x720",
+                        "1920x1080",
+                        "2304x1296",
+                        "2560x1440",
+                        "2880x1620"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.Resolution"
+                },
+                "fps": {
+                    "Default": 30,
+                    "ParamType": "int",
+                    "LegalValue": "[5,30]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.FPS"
+                },
+                "bitrate_mode": {
+                    "Default": "vbr",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "mbr",
+                        "vbr",
+                        "cbr"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.H264.RateControl"
+                },
+                "max_bitrate": {
+                    "Default": 4096,
+                    "ParamType": "int",
+                    "LegalValue": "[1024,8192]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.H264.MaxBitRate"
+                },
+                "bitrate": {
+                    "Default": 4096,
+                    "ParamType": "int",
+                    "LegalValue": "[128,8192]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.H264.BitRate"
+                },
+                "key_frame_interval": {
+                    "Default": 1,
+                    "ParamType": "int",
+                    "LegalValue": "[1,10]",
+                    "ConfigGroup": "Custom.SmartCodec.0.TargetIFramePeriod"
+                },
+                "quality": {
+                    "Default": 5,
+                    "ParamType": "int",
+                    "LegalValue": "[0,10]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.H264.Quality"
+                },
+                "profile": {
+                    "Default": "baseline",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "baseline",
+                        "main",
+                        "high"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.0.H264.Profile"
+                },
+                "ConfigGroup": "Custom.SmartCodec.0.TargetIFramePeriod,VideoSource.0.VideoProfile.0"
+            },
+            "1": {
+                "codec": {
+                    "Default": "H264",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "H264",
+                        "H265"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.Codec"
+                },
+                "resolution": {
+                    "Default": "1920x1080",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "1280x720",
+                        "1920x1080"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.Resolution"
+                },
+                "fps": {
+                    "Default": 30,
+                    "ParamType": "int",
+                    "LegalValue": "[5,30]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.FPS"
+                },
+                "bitrate_mode": {
+                    "Default": "vbr",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "mbr",
+                        "vbr",
+                        "cbr"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.H264.RateControl"
+                },
+                "max_bitrate": {
+                    "Default": 2048,
+                    "ParamType": "int",
+                    "LegalValue": "[512,2048]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.H264.MaxBitRate"
+                },
+                "bitrate": {
+                    "Default": 2048,
+                    "ParamType": "int",
+                    "LegalValue": "[128,2048]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.H264.BitRate"
+                },
+                "key_frame_interval": {
+                    "Default": 1,
+                    "ParamType": "int",
+                    "LegalValue": "[1,10]",
+                    "ConfigGroup": "Custom.SmartCodec.1.TargetIFramePeriod"
+                },
+                "quality": {
+                    "Default": 5,
+                    "ParamType": "int",
+                    "LegalValue": "[0,10]",
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.H264.Quality"
+                },
+                "profile": {
+                    "Default": "baseline",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "baseline",
+                        "main",
+                        "high"
+                    ],
+                    "ConfigGroup": "VideoSource.0.VideoProfile.1.H264.Profile"
+                },
+                "ConfigGroup": "VideoSource.0.VideoProfile.1,Custom.SmartCodec.1.TargetIFramePeriod"
+            },
+            "ConfigGroup": "VideoSource.0.VideoProfile,Custom.SmartCodec"
+        },
+        "audio": {
+            "codec": {
+                "Default": "G711U",
+                "ParamType": "string",
+                "LegalValue": [
+                    "G711U"
+                ],
+                "ConfigGroup": "AudioSource.0.AudioProfile.0.Codec"
+            },
+            "mute": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "AudioSource.0.Mute"
+            },
+            "volume": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "AudioSource.0.Gain"
+            },
+            "denoise_enabled": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "AudioSource.0.DeNoiseMode"
+            },
+            "denoise_level": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "AudioSource.0.DeNoiseLevel"
+            },
+            "ConfigGroup": "AudioSource.0"
+        },
+        "smart_codec": {
+            "level": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,3]",
+                "ConfigGroup": "Custom.SmartCodec.Level"
+            },
+            "ConfigGroup": "Custom.SmartCodec.Level"
+        },
+        "ConfigGroup": "AudioSource.0,VideoSource.0.VideoProfile,Custom.SmartCodec"
+    },
+    "date_time": {
+        "ntp": {
+            "enabled": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "Generic.Time.NTP.Enabled"
+            },
+            "server": {
+                "Default": "time.google.com",
+                "ParamType": "hostname",
+                "LegalSize": 253,
+                "ConfigGroup": "Generic.Time.NTP.Server"
+            },
+            "server_connectable": {
+                "ReadOnly": true,
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "Generic.Time.NTP.ServerConnectable"
+            },
+            "ConfigGroup": "Generic.Time.NTP"
+        },
+        "dst": {
+            "Default": true,
+            "ParamType": "bool",
+            "ConfigGroup": "Generic.Time.DST.Enabled"
+        },
+        "time_zone": {
+            "Default": "US/Arizona",
+            "ParamType": "string",
+            "ConfigGroup": "Generic.Time.Timezone"
+        },
+        "time_zone_offset": {
+            "ReadOnly": true,
+            "Default": "28800",
+            "ParamType": "string",
+            "ConfigGroup": "Generic.Time.TimezoneOffset"
+        },
+        "utc_time": {
+            "WriteOnly": true,
+            "Default": "1970/01/01 00:40:20",
+            "ParamType": "string",
+            "ConfigGroup": "Generic.Time.ServerDateTime"
+        },
+        "current_time": {
+            "Default": "1970/01/01 00:40:20",
+            "ParamType": "string",
+            "ConfigGroup": "Generic.Time.CurrDateTime"
+        },
+        "ConfigGroup": "Generic.Time"
+    },
+    "maintenance": {
+        "firmware": {
+            "version": {
+                "ReadOnly": true,
+                "ParamType": "string",
+                "ConfigGroup": "Property.Firmware.SynoVer"
+            },
+            "auto_upgrade_mode": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": [
+                    0,
+                    1,
+                    2
+                ],
+                "ConfigGroup": ""
+            },
+            "ConfigGroup": "Property.Firmware"
+        },
+        "copyright_year": {
+            "ReadOnly": true,
+            "ParamType": "string",
+            "ConfigGroup": "Property.Firmware.BuildDate"
+        },
+        "operation_mode": {
+            "ParamType": "string",
+            "LegalValue": [
+                "svs",
+                "onvif"
+            ],
+            "ConfigGroup": "Custom.OperationMode"
+        },
+        "ConfigGroup": "Property.Firmware,Custom.OperationMode"
+    },
+    "security": {
+        "encryption_key": {
+            "ReadOnly": true,
+            "ParamType": "string",
+            "ConfigGroup": "PublicKey"
+        },
+        "debug_mode": {
+            "WriteOnly": true,
+            "Default": false,
+            "ParamType": "bool",
+            "ConfigGroup": "Custom.DebugMode"
+        },
+        "info": {
+            "name": {
+                "Default": "Synology Camera",
+                "LegalSize": 64,
+                "ParamType": "multi_lang",
+                "ConfigGroup": "Custom.Name"
+            },
+            "model": {
+                "ReadOnly": true,
+                "ParamType": "string",
+                "ConfigGroup": "Property.Product.Model"
+            },
+            "serial_number": {
+                "ReadOnly": true,
+                "ParamType": "string",
+                "ConfigGroup": "Property.Product.SerialNumber"
+            },
+            "mac": {
+                "ReadOnly": true,
+                "ParamType": "string",
+                "ConfigGroup": "Network.0.MACAddress"
+            },
+            "language": {
+                "Default": "def",
+                "ParamType": "string",
+                "LegalValue": [
+                    "def",
+                    "enu",
+                    "fre",
+                    "ger",
+                    "ita",
+                    "spn",
+                    "cht",
+                    "chs",
+                    "jpn",
+                    "krn",
+                    "ptb",
+                    "rus",
+                    "dan",
+                    "nor",
+                    "sve",
+                    "nld",
+                    "plk",
+                    "ptg",
+                    "hun",
+                    "trk",
+                    "csy",
+                    "tha"
+                ],
+                "ConfigGroup": "Custom.Language"
+            },
+            "ConfigGroup": "Custom,Property.Product,Network.0.MACAddress"
+        },
+        "user": {
+            "account": {
+                "Default": "user",
+                "LegalSize": 32,
+                "ParamType": "string",
+                "ConfigGroup": "Generic.User.0.Username"
+            },
+            "password": {
+                "WriteOnly": true,
+                "Default": "pass",
+                "ParamType": "string",
+                "ConfigGroup": "Generic.User.0.Password"
+            },
+            "password_edit_time": {
+                "ReadOnly": true,
+                "Default": 0,
+                "ParamType": "int",
+                "ConfigGroup": "Custom.PasswordEditTime"
+            },
+            "ConfigGroup": "Generic.User.0,Custom.PasswordEditTime"
+        },
+        "transfer_protocol": {
+            "Default": "http,https",
+            "ParamType": "string_list",
+            "LegalValue": [
+                "http",
+                "https"
+            ],
+            "ConfigGroup": "Network.TransferProtocol"
+        },
+        "srtp": {
+            "Default": true,
+            "ParamType": "bool",
+            "ConfigGroup": "Network.Streaming.RTSP.TLSEnabled"
+        },
+        "connection": {
+            "info": {
+                "ReadOnly": true,
+                "ParamType": "object",
+                "ConfigGroup": "OnlineUser.Info"
+            },
+            "ConfigGroup": "OnlineUser.Info"
+        },
+        "ip_filter": {
+            "mode": {
+                "Default": "no_limit",
+                "ParamType": "string",
+                "LegalValue": [
+                    "no_limit",
+                    "allow",
+                    "block"
+                ],
+                "ConfigGroup": "Network.Filter.Mode"
+            },
+            "allow": {
+                "Default": [],
+                "ParamType": "array",
+                "DummyRec": {
+                    "Address": {
+                        "Default": "0.0.0.0",
+                        "ParamType": "ipv4",
+                        "AllowIPRangeFormat": true
+                    },
+                    "CreatedTime": {
+                        "ReadOnly": true,
+                        "Default": 0,
+                        "ParamType": "int"
+                    }
+                },
+                "UniquePattern": "Address_Activity",
+                "ConfigGroup": "Network.Filter.Allow"
+            },
+            "deny": {
+                "Default": [],
+                "ParamType": "array",
+                "DummyRec": {
+                    "Address": {
+                        "Default": "0.0.0.0",
+                        "ParamType": "ipv4",
+                        "AllowIPRangeFormat": true
+                    },
+                    "CreatedTime": {
+                        "ReadOnly": true,
+                        "Default": 0,
+                        "ParamType": "int"
+                    }
+                },
+                "UniquePattern": "Address_Activity",
+                "ConfigGroup": "Network.Filter.Deny"
+            },
+            "ConfigGroup": "Network.Filter"
+        },
+        "auto_block": {
+            "enabled": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "Network.Filter.AutoBlock.Enabled"
+            },
+            "duration": {
+                "Default": 10,
+                "ParamType": "int",
+                "LegalValue": "[1,999]",
+                "ConfigGroup": "Network.Filter.AutoBlock.Duration"
+            },
+            "times": {
+                "Default": 5,
+                "ParamType": "int",
+                "LegalValue": "[1,999]",
+                "ConfigGroup": "Network.Filter.AutoBlock.Times"
+            },
+            "ConfigGroup": "Network.Filter.AutoBlock"
+        },
+        "network": {
+            "upnp": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "Network.UPnP.Enabled"
+            },
+            "dhcp": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "Network.0.BootProto"
+            },
+            "ipv4": {
+                "ip": {
+                    "Default": "192.168.0.1",
+                    "ParamType": "ipv4",
+                    "ConfigGroup": "Network.0.Static.IPAddress"
+                },
+                "subnet_mask": {
+                    "Default": "255.255.255.0",
+                    "ParamType": "ipv4",
+                    "ConfigGroup": "Network.0.Static.SubnetMask"
+                },
+                "gateway": {
+                    "Default": "192.168.0.255",
+                    "ParamType": "ipv4",
+                    "ConfigGroup": "Network.0.Static.Gateway"
+                },
+                "dns_server": {
+                    "Default": "8.8.8.8",
+                    "ParamType": "ipv4",
+                    "ConfigGroup": "Network.0.Static.DNSServer1"
+                },
+                "dns_server_secondary": {
+                    "Default": "8.8.8.8",
+                    "AllowEmpty": true,
+                    "ParamType": "ipv4",
+                    "ConfigGroup": "Network.0.Static.DNSServer2"
+                },
+                "ConfigGroup": "Network.0"
+            },
+            "port": {
+                "http": {
+                    "Default": 80,
+                    "ParamType": "int",
+                    "LegalValue": "[1,65535]",
+                    "ConfigGroup": "Network.HTTP.Port"
+                },
+                "https": {
+                    "Default": 443,
+                    "ParamType": "int",
+                    "LegalValue": "[1,65535]",
+                    "ConfigGroup": "Network.HTTPS.Port"
+                },
+                "rtsp": {
+                    "Default": 554,
+                    "ParamType": "int",
+                    "LegalValue": "[1,65535]",
+                    "ConfigGroup": "Network.Streaming.RTSP.Port"
+                },
+                "srtp": {
+                    "Default": 322,
+                    "ParamType": "int",
+                    "LegalValue": "[1,65535]",
+                    "ConfigGroup": "Network.Streaming.RTSP.TLSPort"
+                },
+                "onvif": {
+                    "Default": 8080,
+                    "ParamType": "int",
+                    "LegalValue": "[1,65535]",
+                    "ConfigGroup": "Network.ONVIF.Port"
+                },
+                "ConfigGroup": "Network"
+            },
+            "eap": {
+                "enabled": {
+                    "Default": "",
+                    "ParamType": "bool",
+                    "ConfigGroup": "Network.0.SecurityMode"
+                },
+                "identity": {
+                    "Default": "",
+                    "ParamType": "string",
+                    "ConfigGroup": "Network.0.EAP.Identity"
+                },
+                "method": {
+                    "Default": "PEAP",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "PEAP",
+                        "TTLS",
+                        "TLS"
+                    ],
+                    "ConfigGroup": "Network.0.EAP.EAP"
+                },
+                "password": {
+                    "WriteOnly": true,
+                    "Default": "",
+                    "ParamType": "string",
+                    "ConfigGroup": "Network.0.EAP.Password"
+                },
+                "phase1": {
+                    "Default": "",
+                    "ParamType": "string",
+                    "ConfigGroup": "Network.0.EAP.Phase1"
+                },
+                "phase2": {
+                    "Default": "MSCHAPV2",
+                    "ParamType": "string",
+                    "LegalValue": [
+                        "MSCHAPV2",
+                        "GTC"
+                    ],
+                    "ConfigGroup": "Network.0.EAP.Phase2"
+                },
+                "private_key_password": {
+                    "WriteOnly": true,
+                    "Default": "",
+                    "ParamType": "string",
+                    "ConfigGroup": "Network.0.EAP.PrivateKeyPasswd"
+                },
+                "ca_cert_update_time": {
+                    "ReadOnly": true,
+                    "Default": 0,
+                    "ParamType": "int",
+                    "ConfigGroup": "Network.0.EAP.CACertUpdateTime"
+                },
+                "user_cert_update_time": {
+                    "ReadOnly": true,
+                    "Default": 0,
+                    "ParamType": "int",
+                    "ConfigGroup": "Network.0.EAP.UserCertUpdateTime"
+                },
+                "ConfigGroup": "Network.0"
+            },
+            "ConfigGroup": "Network"
+        },
+        "ConfigGroup": "Custom,OnlineUser.Info,Property.Product,Network,Generic.User.0,PublicKey"
+    },
+    "recording": {
+        "setting": {
+            "mode": {
+                "Default": "disabled",
+                "ParamType": "string",
+                "LegalValue": [
+                    "disabled",
+                    "continuous",
+                    "event"
+                ],
+                "ConfigGroup": "Custom.Edge.Mode"
+            },
+            "event_type": {
+                "Default": "md,ai",
+                "ParamType": "string_list",
+                "LegalValue": [
+                    "disconn",
+                    "md",
+                    "ai",
+                    "td",
+                    "ad"
+                ],
+                "ConfigGroup": "Custom.Edge.EventType"
+            },
+            "stream_number": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": [
+                    0,
+                    1
+                ],
+                "ConfigGroup": "Custom.Edge.StreamNumber"
+            },
+            "drop_frame_edge_enabled": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "Custom.Edge.DropFrameEdgeEnabled"
+            },
+            "profile": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": [
+                    0,
+                    1
+                ],
+                "ConfigGroup": "Recorder.0.MediaProfile"
+            },
+            "truncate_time": {
+                "Default": 2,
+                "ParamType": "int",
+                "LegalValue": "[1,60]",
+                "ConfigGroup": "Media.0.MaxFileLength"
+            },
+            "rotate": {
+                "Default": 7,
+                "ParamType": "int",
+                "ConfigGroup": "Storage.0.FileKeepDays"
+            },
+            "ConfigGroup": "Recorder.0.MediaProfile,Custom.Edge,Storage.0.FileKeepDays,Media.0.MaxFileLength"
+        },
+        "sd_card": {
+            "capacity": {
+                "free_size": {
+                    "ReadOnly": true,
+                    "ParamType": "int",
+                    "ConfigGroup": "Storage.0.FreeSize"
+                },
+                "used_size": {
+                    "ReadOnly": true,
+                    "ParamType": "int",
+                    "ConfigGroup": "Storage.0.UsedSize"
+                },
+                "total_size": {
+                    "ReadOnly": true,
+                    "ParamType": "int",
+                    "ConfigGroup": "Storage.0.TotalSize"
+                },
+                "ConfigGroup": "Storage.0"
+            },
+            "status": {
+                "ReadOnly": true,
+                "ParamType": "string",
+                "ConfigGroup": "Storage.0.Status"
+            },
+            "ConfigGroup": "Storage.0"
+        },
+        "ConfigGroup": "Recorder.0.MediaProfile,Custom.Edge,Storage.0,Media.0.MaxFileLength"
+    },
+    "event": {
+        "motion_detection": {
+            "enabled": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Motion.0.Enabled"
+            },
+            "sensitivity": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[1,100]",
+                "ConfigGroup": "VideoSource.0.Motion.0.Sensitivity"
+            },
+            "ConfigGroup": "VideoSource.0.Motion.0"
+        },
+        "audio_detection": {
+            "enabled": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "AudioSource.0.SoundDetect.Enabled"
+            },
+            "threshold": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[1,100]",
+                "ConfigGroup": "AudioSource.0.SoundDetect.0.Threshold"
+            },
+            "strength": {
+                "ReadOnly": true,
+                "ParamType": "int",
+                "ConfigGroup": "AudioSource.0.SoundDetect.0.Strength"
+            },
+            "ConfigGroup": "AudioSource.0.SoundDetect"
+        },
+        "tampering_detection": {
+            "enabled": {
+                "Default": true,
+                "ParamType": "bool",
+                "ConfigGroup": "VideoSource.0.Motion.Tamper.Enabled"
+            },
+            "threshold": {
+                "Default": 50,
+                "ParamType": "int",
+                "LegalValue": "[1,100]",
+                "ConfigGroup": "VideoSource.0.Motion.Tamper.Threshold"
+            },
+            "ConfigGroup": "VideoSource.0.Motion.Tamper"
+        },
+        "ConfigGroup": "VideoSource.0.Motion,AudioSource.0.SoundDetect"
+    },
+    "led_indicator": {
+        "enabled": {
+            "Default": true,
+            "ParamType": "bool",
+            "ConfigGroup": "Custom.LedIndicator"
+        },
+        "ConfigGroup": "Custom.LedIndicator"
+    },
+    "dva": {
+        "threshold": {
+            "detection": {
+                "Default": 20,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "Custom.Dva.Threshold.Detection"
+            },
+            "tracking": {
+                "Default": 60,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "Custom.Dva.Threshold.Tracking"
+            },
+            "ConfigGroup": "Custom.Dva.Threshold"
+        },
+        "object_detection": {
+            "min_people_trigger_time_seconds": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,86400]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.MinPeopleTriggerTimeSeconds"
+            },
+            "min_vehicle_trigger_time_seconds": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,86400]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.MinVehicleTriggerTimeSeconds"
+            },
+            "min_trigger_object_ratio_permille": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,1000]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.MinTriggerObjectRatioPermille"
+            },
+            "class_id_filter": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,64]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.ClassIdFilter"
+            },
+            "triggered_only_both_people_vehicle": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.TriggeredOnlyBothPeopleVehicle"
+            },
+            "triggered_only_moved_people": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.TriggeredOnlyMovedPeople"
+            },
+            "triggered_only_moved_vehicle": {
+                "Default": false,
+                "ParamType": "bool",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.TriggeredOnlyMovedVehicle"
+            },
+            "crowd_people_threshold": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,100]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.CrowdPeopleThreshold"
+            },
+            "detection_region": {
+                "Default": "0,0,0,1,1,1,1,0",
+                "ParamType": "string",
+                "LegalSize": 300,
+                "ConfigGroup": "Custom.Dva.ObjectDetection.DetectionRegion"
+            },
+            "detection_region_type": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,1]",
+                "ConfigGroup": "Custom.Dva.ObjectDetection.DetectionRegionType."
+            },
+            "ConfigGroup": "Custom.Dva.ObjectDetection"
+        },
+        "intrusion_detection": {
+            "fence_line": {
+                "Default": "0.3,0.6,0.5,0.5,0.7,0.6",
+                "ParamType": "string",
+                "LegalSize": 300,
+                "ConfigGroup": "Custom.Dva.IntrusionDetection.FenceLine"
+            },
+            "fence_intersect_type": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,3]",
+                "ConfigGroup": "Custom.Dva.IntrusionDetection.FenceIntersectType"
+            },
+            "min_trigger_object_ratio_permille": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,1000]",
+                "ConfigGroup": "Custom.Dva.IntrusionDetection.MinTriggerObjectRatioPermille"
+            },
+            "class_id_filter": {
+                "Default": 0,
+                "ParamType": "int",
+                "LegalValue": "[0,64]",
+                "ConfigGroup": "Custom.Dva.IntrusionDetection.ClassIdFilter"
+            },
+            "ConfigGroup": "Custom.Dva.IntrusionDetection"
+        },
+        "ConfigGroup": "Custom.Dva"
+    },
+    "audio_sample_rate": {
+        "ReadOnly": true,
+        "ParamType": "int",
+        "ConfigGroup": "AudioSource.0.AudioProfile.0.SampleRate"
+    }
+}

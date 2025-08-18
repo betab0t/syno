@@ -1,0 +1,74 @@
+#!/bin/sh
+# chkconfig: 2345 50 50
+
+prog=streamd
+binpath=/bin/$prog
+pidfile=/tmp/run/"$prog".pid
+wait_time=3
+nice_level=-5
+
+start()
+{
+	echo "Start $prog ..."
+	args=""
+	start-stop-daemon --start -n $prog --nicelevel $nice_level --make-pidfile --pidfile $pidfile --exec $binpath -- $args &
+}
+
+stop()
+{
+	echo "Stop $prog ..."
+	start-stop-daemon --stop --quiet --signal SIGUSR2 -n $prog --exec $binpath --pidfile $pidfile
+
+	# wait prog stop, kill it if timeout.
+	while true
+	do
+		PROG_PID=`pidof $binpath`
+		if [ "$PROG_PID" != "" ]; then
+			if [ $wait_time -gt 0 ]; then
+				echo "Wait $prog stop...$wait_time"
+				let "wait_time--"
+			else
+				echo "Wait $prog stop...$wait_time, kill pid ($PROG_PID)!"
+				killall -9 $binpath
+			fi
+			sleep 1
+		else
+			echo "Wait $prog stop done"
+			break
+		fi
+	done
+}
+
+reload()
+{
+	echo "Reload $prog ..."
+	start-stop-daemon --stop -n $prog --exec $binpath --pidfile $pidfile -s SIGHUP
+}
+
+restart()
+{
+	stop
+	#sleep 1
+	start
+}
+
+# See how we were called.
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	reload)
+		reload
+		;;
+	restart)
+		restart
+		;;
+	*)
+	echo "Usage: $0 {start|stop|restart|reload}"
+	exit 1
+esac
+
+exit $?

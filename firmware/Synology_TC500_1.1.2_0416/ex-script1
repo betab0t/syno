@@ -1,0 +1,22 @@
+#!/bin/sh
+# [DESC] rootfs
+# rootfs.squashfs.img
+# rootfs0: mtd7
+# rootfs1: mtd9
+
+free
+
+target_boot=`uboot_printenv target_boot`
+if [ "${target_boot}" == "target_boot=1" ]; then 
+
+echo "nandwrite rootfs $1 to /dev/mtd7"
+#flash_eraseall /dev/mtd7 && ubiformat /dev/mtd7 -f $1
+flash_eraseall /dev/mtd7 && nandwrite -p /dev/mtd7 $1
+
+else
+
+echo "nandwrite rootfs $1 to /dev/mtd9"
+#flash_eraseall /dev/mtd9 && ubiformat /dev/mtd9 -f $1
+flash_eraseall /dev/mtd9 && nandwrite -p /dev/mtd9 $1
+
+fi

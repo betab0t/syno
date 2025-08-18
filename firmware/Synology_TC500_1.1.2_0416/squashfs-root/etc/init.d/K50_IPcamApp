@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# run init debug mode
+if [ -d /data/app/etc/rc.d/rc1.d ] && [ -f /tmp/run_init_debug ]; then
+	for initscript in /data/app/etc/rc.d/rc1.d/K[0-9][0-9]*
+	do
+		if [ -x $initscript ] ; then
+			echo "[stop]: $initscript"
+			$initscript stop
+			if [ "$initscript" == "/data/app/etc/rc.d/rc1.d/K80mediad" ]; then
+				sleep 5
+				sync
+			fi
+		fi
+	done
+else
+	for initscript in /etc/rc.d/rc1.d/K[0-9][0-9]*
+	do
+		if [ -x $initscript ] ; then
+			echo "[stop]: $initscript"
+			$initscript stop
+			if [ "$initscript" == "/etc/rc.d/rc1.d/K80mediad" ]; then
+				sleep 5
+				sync
+			fi
+		fi
+	done
+fi
+
+sleep 2
+sync

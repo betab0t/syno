@@ -1,0 +1,412 @@
+#!/bin/sh
+
+# AI CNN MEM SIZE (Max size 32MB)
+#export NVTD_CNN_MEM_SIZE=0x1000000
+
+set_sys_vm() {
+	echo "IPcamApp: set_sys_vm()"
+
+	# set vm in /etc/sysctl.conf
+
+	# reduce SD read/write blocking
+	#echo 1 > /proc/sys/vm/dirty_background_ratio
+	#echo 2 > /proc/sys/vm/dirty_ratio
+	#echo 100 > /proc/sys/vm/dirty_writeback_centisecs
+	#echo 1000 > /proc/sys/vm/dirty_expire_centisecs
+	#echo 1000 > /proc/sys/vm/vfs_cache_pressure
+
+	# reserve free memory on system, the oom will start if the free memory size is less than min_free_kbytes.
+	#echo 10240 > /proc/sys/vm/min_free_kbytes
+}
+
+set_pinmux() {
+	echo "IPcamApp: set_pinmux()"
+
+	# set P_GPIO0 work as PWM0
+	echo pwm  0x1  > /proc/nvt_info/nvt_pinmux/pinmux_set
+	# set P_GPIO5 work as PWM5
+	echo pwm2 0x20 > /proc/nvt_info/nvt_pinmux/pinmux_set
+}
+
+# set gpio & pwm
+set_pwm_gpio() {
+	echo "IPcamApp: set_pwm_gpio()"
+
+	# insert module: gpio driver
+	echo "insert module: drv_gpio.ko"
+	insmod /lib/modules/extra/drv_gpio.ko
+
+	# insert module: pwm driver
+	echo "insert module: drv_pwm.ko"
+	insmod /lib/modules/extra/drv_pwm.ko
+
+	# set drv_gpio blink timer
+	# bkt [pin] [slow timer] [fast timer] [sequence timer], pin is just set 0.
+	echo bkt 00 1000 0100 0100 > /proc/gpio
+
+	# enable Power LED (P_GPIO5, 37)
+	# cfg [pin] [dir], dir 0: input, 1: output.
+	#echo cfg 37 1 > /proc/gpio
+	# set [pin] [mode], mode 0:off, 1:on, 2:slow blink, 3: fast blink
+	#echo set 37 3 > /proc/gpio
+
+	# enable IRCUT (P_GPIO1, 33)
+	# cfg [pin] [dir], dir 0: input, 1: output.
+	echo cfg 33 1 > /proc/gpio
+	# set [pin] [mode]
+	echo set 33 1 > /proc/gpio
+
+	# enable IRLED (P_GPIO0, PWM0) freq 20000 hz, duty 0, polarity normal
+	# cfg [id] [freq] [duty] [polarity]
+	echo cfg 0 20000 0 0 > /proc/pwm
+	# set [id] [duty]
+	echo set 0 0 > /proc/pwm
+
+	# enable Power LED (P_GPIO5, PWM5) freq 1000 hz, duty 0, polarity normal
+	# cfg [id] [freq] [duty ratio] [polarity]
+	echo cfg 5 1000 0 0 > /proc/pwm
+
+	# set drv_pwm blink timer
+	# bkt [id] [slow timer] [ fast timer]
+	echo bkt 5 1000 100 > /proc/pwm
+
+	# set [id] [duty ratio]
+	echo set 5 10 > /proc/pwm
+	# bkset [id] [bkmode], bkmode 0:off, 1:slow blink, 2: fast blink
+	echo bkset 5 2 > /proc/pwm
+}
+
+set_factory_mode() {
+	echo "IPcamApp: set_factory_mode()"
+
+	# if factory_mode is not exist in product env, set factory_mode to 1 as default
+	FACT_MODE=`product_printenv factory_mode|cut -d = -f 2`
+	if [ "$FACT_MODE" == "" ]; then
+		product_setenv factory_mode 1
+	fi
+
+	# check factory mode
+	FACT_MODE=`product_printenv factory_mode|cut -d = -f 2`
+	if [ "$FACT_MODE" == "1" ]; then
+		# set factory mode on
+		touch /tmp/factory_mode
+		echo "factory mode is ON"
+		# disable isp_check_cb
+		touch /tmp/isp_check_stop
+		# force to load isp_fac.cfg
+		touch /tmp/force_isp_fac
+	fi
+}
+
+# set eth0 hwaddr by MAC in product env
+init_eth() {
+	echo "IPcamApp: init_eth()"
+
+	ifconfig eth0 down
+
+	ETH_MAC=$(product_printenv MAC|cut -d = -f 2)
+	if [ "$ETH_MAC" == "" ]; then
+		DEF_ETH_MAC=00:00:23:34:45:66
+		echo "set eth0 mac to default MAC!"
+		ifconfig eth0 hw ether $DEF_ETH_MAC
+		product_setenv MAC "$DEF_ETH_MAC"
+	else
+		ifconfig eth0 hw ether $ETH_MAC
+	fi
+
+	ifconfig eth0 up
+}
+
+mount_tmpfs() {
+	echo "IPcamApp: mount_tmpfs()"
+
+	if [ -d /data/app ]; then
+		mount -t tmpfs -o size=4M tmpfs /data/app
+	fi
+
+	if [ -d /data/log ]; then
+		mount -t tmpfs -o size=4M tmpfs /data/log
+	fi
+}
+
+# create ubi volumes and mount them
+mount_ubifs() {
+	echo "IPcamApp: mount_ubifs()"
+
+	# attach mtd to ubi
+
+	#dev:    size   erasesize  name
+	#mtd0: 00040000 00020000 "loader"
+	#mtd1: 00040000 00020000 "fdt"
+	#mtd2: 00040000 00020000 "fdt.restore"
+	#mtd3: 00200000 00020000 "uboot"
+	#mtd4: 00040000 00020000 "uenv"
+	#mtd5: 00040000 00020000 "product"
+	#mtd6: 00400000 00020000 "kernel0"
+	#mtd7: 02f80000 00020000 "rootfs0"
+	#mtd8: 00400000 00020000 "kernel1"
+	#mtd9: 02f80000 00020000 "rootfs1"
+	#mtd10: 015c0000 00020000 "userdata"
+	#mtd11: 08000000 00020000 "all"
+
+	ubiattach -m 10 -d 1 /dev/ubi_ctrl
+	if [ "$?" != "0" ]; then
+		echo "ubiattach failed!"
+	fi
+
+	# check ubi volume status
+	UBI_VOL_APP=$(product_printenv ubimkvol_app|cut -d = -f 2)
+	UBI_VOL_LOG=$(product_printenv ubimkvol_log|cut -d = -f 2)
+	if [ ! -c /dev/ubi1_0 ] || [ ! -c /dev/ubi1_1 ] || [ "$UBI_VOL_APP" != "1" ] || [ "$UBI_VOL_LOG" != "1" ] ; then
+		echo "there is no /dev/ubi1_0 or /dev/ubi1_1 or mount failed before"
+		echo "do ubiattach"
+		ubidetach -d 1 /dev/ubi_ctrl
+
+		echo "do flash_eraseall"
+		flash_eraseall /dev/mtd10
+
+		echo "re ubiattach"
+		ubiattach -m 10 -d 1 /dev/ubi_ctrl
+		product_setenv ubimkvol_app 0
+		product_setenv ubimkvol_log 0
+		sync
+	fi
+
+	# mount /data/app
+	UBI_VOL_APP=$(product_printenv ubimkvol_app|cut -d = -f 2)
+	if [ "$UBI_VOL_APP" == "" ] || [ "$UBI_VOL_APP" == "0" ] || [ ! -c /dev/ubi1_0 ]; then
+		echo "UBI_VOL_APP: $UBI_VOL_APP"
+		ubimkvol -s 12MiB -n 0 -N data_app /dev/ubi1
+		product_setenv ubimkvol_app 1
+	fi
+	mount -t ubifs -o sync,noatime,rw ubi1:data_app /data/app/
+	MOUNT_RET=$?
+	if [ "$MOUNT_RET" != "0" ]; then
+		echo "mount /data/app fail, try to mount /data/app as tmpfs!"
+		product_setenv ubimkvol_app 0
+		mount -t tmpfs -o size=4M tmpfs /data/app
+	fi
+
+	# mount /data/log
+	UBI_VOL_LOG=$(product_printenv ubimkvol_log|cut -d = -f 2)
+	if [ "$UBI_VOL_LOG" == "" ] || [ "$UBI_VOL_LOG" == "0" ] || [ ! -c /dev/ubi1_1 ]; then
+		echo "UBI_VOL_APP: $UBI_VOL_APP"
+		ubimkvol -m -n 1 -N data_log /dev/ubi1
+		product_setenv ubimkvol_log 1
+	fi
+	mount -t ubifs -o sync,noatime,rw ubi1:data_log /data/log/
+	MOUNT_RET=$?
+	if [ "$MOUNT_RET" != "0" ]; then
+		echo "mount /data/log fail, try to mount /data/app as tmpfs!"
+		product_setenv ubimkvol_log 0
+		mount -t tmpfs -o size=4M tmpfs /data/log
+	fi
+}
+
+# prepare file system files
+prepare_fs() {
+	echo "IPcamApp: prepare_fs()"
+
+	mkdir /tmp/run
+	mkdir /tmp/lib
+	mkdir /tmp/factory_info
+	mkdir /tmp/log && touch /tmp/log/debug.log
+	touch /tmp/resolv.conf
+
+	if [ ! -f "/data/app/localtime" ]; then
+		cp -f /etc/localtime.tmp /data/app/localtime
+	fi
+
+	[ -d "/data/app/var/db" ] || mkdir -p /data/app/var/db
+	[ -d "/data/app/dhcpcd" ] || mkdir -p /data/app/dhcpcd
+}
+
+# set coredump
+set_coredump() {
+	echo "IPcamApp: set_coredump()"
+
+	echo 1 > /proc/sys/kernel/core_uses_pid
+	ulimit -c unlimited
+	#echo '|/bin/mytee.sh /mnt/SD0/core-%e-%p-%t' > /proc/sys/kernel/core_pattern
+	echo '|/bin/myteelog.sh /mnt/SD0/core-%e' > /proc/sys/kernel/core_pattern
+}
+
+# set pstore
+set_pstore() {
+	echo "IPcamApp: set_pstore()"
+
+	mount -t pstore pstore /sys/fs/pstore
+	#take a look at pstore file
+	ls -l /sys/fs/pstore
+}
+
+prepare_isp_cfg() {
+	echo "IPcamApp: prepare_isp_cfg()"
+
+	# check lens version
+	MID=$(product_printenv MID|cut -d = -f 2)
+	if [ "$MID" == "IC-6121STE" ]; then
+		ISP_SRC=/etc/app/isp_8mlens
+	else
+		ISP_SRC=/etc/app/isp
+	fi
+	rm -f /tmp/isp
+	ln -s $ISP_SRC /tmp/isp
+}
+
+set_nvtd_env() {
+	echo "IPcamApp: set_nvtd_env()"
+
+	#export NVTD_CNN_IMG_SIZE_W=768
+	#export NVTD_CNN_IMG_SIZE_H=432
+	#export NVTD_CNN_FRAME_RATE=5
+	#export NVTD_JPG_ENC_IMG_SIZE_W=160
+	#export NVTD_JPG_ENC_IMG_SIZE_H=90
+	#export NVTD_JPG_ENC_IMG_QUALITY=50
+
+	if [ "$MID" == "IC-6121STE" ]; then
+		export NVTD_SHDR_TONE_LV_DAY=90
+		export NVTD_SHDR_TONE_LV_NIGHT=85
+	else
+		export NVTD_SHDR_TONE_LV_DAY=100
+		export NVTD_SHDR_TONE_LV_NIGHT=85
+	fi
+}
+
+#Check /data/app/eap/ca.pem and client.p12
+ca_pem_path="/data/app/eap/ca.pem"
+client_p12_path="/data/app/eap/client.p12"
+
+set_ca_datetime_to_system() {
+	echo "IPcamApp: set_ca_datetime_to_system()"
+
+	#Get ca.pem startdate
+	startdate=$(openssl x509 -in "$ca_pem_path" -noout -startdate | cut -d "=" -f 2)
+	#echo $startdate
+	datetime_without_gmt=$(echo "$startdate" | sed 's/ GMT//')
+	echo $datetime_without_gmt
+
+	#Change datetime to UNIX timestamp
+	timestamp=$(date -d "$datetime_without_gmt" +"%s")
+	#echo $timestamp
+
+	#Format timestamp for date command uesd
+	formatted_date=$(date -d "@$timestamp" +"%Y-%m-%d %H:%M:%S")
+	echo "$formatted_date"
+
+	#Set datetime to system
+	echo "set "$formatted_date" to system"
+	date -u -s "$formatted_date"
+}
+
+gen_bad_block_info() {
+	dmesg > /tmp/.dmesg_log
+	if [ -f /tmp/.dmesg_log ]; then
+		`grep "Bad eraseblock" /tmp/.dmesg_log > /tmp/.bad_block_info`
+	fi
+}
+
+##################
+# service starts #
+##################
+
+# set MODEL to product env if product env does not have MODEL value
+FW_MODEL=$(grep Model /version.txt|cut -d = -f 2)
+PROD_MODEL=$(product_printenv MODEL|cut -d = -f 2)
+if [ "$PROD_MODEL" == "" ]; then
+	product_setenv MODEL $FW_MODEL
+	echo "Set Model:$FW_MODEL"
+else
+	echo "Model:$PROD_MODEL"
+fi
+
+# set MID to product env if product env does not have MID value
+MID_DEF=IC-6120STE
+MID=$(product_printenv MID|cut -d = -f 2)
+if [ "$MID" == "" ]; then
+	product_setenv MID $MID_DEF
+	echo "Set MID:$MID_DEF"
+else
+	echo "MID:$MID"
+fi
+
+set_sys_vm
+set_pinmux
+set_pwm_gpio
+set_factory_mode
+init_eth
+mount_ubifs
+prepare_fs
+set_coredump
+set_pstore
+prepare_isp_cfg
+set_nvtd_env
+gen_bad_block_info
+
+# hardware check mode, for hardware checking
+#touch /tmp/hw_chk_mode
+
+if [ -f /tmp/hw_chk_mode ]; then
+	rm -rf /data/app/etc
+	rm -f /data/app/passwd /data/app/group
+	telnetd
+fi
+
+# check passwd & group
+[ ! -L /etc/passwd ] || [ -f "/data/app/passwd" ] || [ ! -f /etc/passwd.tmp ] || cp -f /etc/passwd.tmp /data/app/passwd
+[ ! -L /etc/group ] || [ -f "/data/app/group" ] || [ ! -f /etc/group.tmp ] || cp -f /etc/group.tmp /data/app/group
+
+ifconfig
+
+if [ -f /bin/kmesg_monitor ] && [ -x /bin/kmesg_monitor ]; then
+	/bin/kmesg_monitor &
+fi
+
+#check ca.pem file and set startdate to system
+if [ -f "$ca_pem_path" ] && [ -f "$client_p12_path" ]; then
+	echo "Have certificate set datetime to system"
+	#Check ca.pem file format
+	output=$(openssl x509 -in "$ca_pem_path" -noout -startdate 2>&1)
+	if [ $? -eq 0 ]; then
+		echo "OpenSSL command OK "$output""
+		set_ca_datetime_to_system
+	else
+		echo "OpenSSL can not get ca.pem datetime"
+	fi
+fi
+
+# run init debug mode
+#touch /tmp/run_init_debug
+if [ -d /data/app/etc/rc.d/rc1.d ] && [ -f /tmp/run_init_debug ]; then
+	for initscript in /data/app/etc/rc.d/rc1.d/S[0-9][0-9]*
+	do
+		if [ -x $initscript ] ; then
+			if [ "$initscript" == "/data/app/etc/rc.d/rc1.d/S90webd" ]; then
+				continue
+			fi
+			echo "[start]: $initscript"
+			$initscript start
+			if [ "$initscript" == "/data/app/etc/rc.d/rc1.d/S01systemd" ]; then
+				sleep 3
+			elif [ "$initscript" == "/data/app/etc/rc.d/rc1.d/S10nvtd" ]; then
+				sleep 8
+			fi
+		fi
+	done
+else
+	for initscript in /etc/rc.d/rc1.d/S[0-9][0-9]*
+	do
+		if [ -x $initscript ] ; then
+			if [ "$initscript" == "/etc/rc.d/rc1.d/S90webd" ]; then
+				continue
+			fi
+			echo "[start]: $initscript"
+			$initscript start
+			if [ "$initscript" == "/etc/rc.d/rc1.d/S01systemd" ]; then
+				sleep 3
+			elif [ "$initscript" == "/etc/rc.d/rc1.d/S10nvtd" ]; then
+				sleep 8
+			fi
+		fi
+	done
+fi

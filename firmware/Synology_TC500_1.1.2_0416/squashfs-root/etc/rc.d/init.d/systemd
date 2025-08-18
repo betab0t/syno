@@ -1,0 +1,81 @@
+#!/bin/sh
+# chkconfig: 2345 01 99
+
+prog=systemd
+binpath=/bin/$prog
+pidfile=/tmp/run/"$prog".pid
+
+start()
+{
+	if [ -f /data/app/reset_on_boot ]; then
+		echo "Reset config on boot !!!"
+		if [ -f /tmp/check_flash_write ]; then
+			UPTIME_STR=`uptime`
+			echo "check_flash_write: Reset config on boot,$UPTIME_STR"
+		fi
+		rm -f /data/app/active.json
+		rm -f /data/app/active.json.enc
+		rm -f /data/app/backup.json
+		rm -f /data/app/group
+		rm -f /data/app/passwd
+		rm -f /data/app/reset_on_boot
+		sync
+	fi
+	# reset duid if device MAC has been set by factory cgi.
+	if [ -f /data/app/reset_duid ]; then
+		echo "Reset duid !!!"
+		rm -f /data/app/duid
+		rm -f /data/app/reset_duid
+		sync
+	fi
+
+	if [ ! -d /tmp/run ]; then mkdir -p /tmp/run; fi
+	if [ ! -d /var/run ] && [ ! -L /var/run ] ; then mkdir -p /var/run; fi;
+	[ ! -L /etc/passwd ] || [ -f "/data/app/passwd" ] || [ ! -f /etc/passwd.tmp ] || cp -f /etc/passwd.tmp /data/app/passwd
+	[ ! -L /etc/group ] || [ -f "/data/app/group" ] || [ ! -f /etc/group.tmp ] || cp -f /etc/group.tmp /data/app/group
+
+	echo "Start $prog ..."
+	args=""
+	start-stop-daemon --start -n $prog --make-pidfile --pidfile $pidfile --exec $binpath -- $args &
+}
+
+stop()
+{
+	echo "Stop $prog ..."
+	$binpath -s
+	start-stop-daemon --stop --quiet -n $prog --exec $binpath --pidfile $pidfile
+}
+
+reload()
+{
+	echo "Reload $prog ..."
+	start-stop-daemon --stop -n $prog --exec $binpath --pidfile $pidfile -s SIGHUP
+}
+
+restart()
+{
+	stop
+	sleep 1
+	start
+}
+
+# See how we were called.
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        reload)
+                reload
+		        ;;
+        restart)
+                restart
+                ;;
+	*)
+	echo "Usage: $0 {start|stop|restart|reload}"
+	exit 1
+esac
+
+exit $?

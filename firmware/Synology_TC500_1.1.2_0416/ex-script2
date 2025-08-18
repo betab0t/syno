@@ -1,0 +1,37 @@
+#!/bin/sh
+# [DESC] loader
+# LDTC500_NORMAL.bin
+# loader: mtd0
+
+free
+
+LD_FILE=$1
+SECURE_ENABLED=0
+
+dmesg -c > /dev/null
+echo quary > /proc/nvt_otp_op/otp_trim
+dmesg | grep -q "is_secure_enable()=1"
+if [ $? == 0 ]; then
+	echo -e "secure enabled";
+	SECURE_ENABLED=1
+else
+	echo -e "secure disabled";
+	SECURE_ENABLED=0
+fi
+
+if [ $SECURE_ENABLED == 0 ]; then
+	if [ "$LD_FILE" != "" ] && [ -f $LD_FILE ]; then
+		nanddump -n --bb skipbad -l 32768 -f /tmp/mtd0_loader.bin /dev/mtd0
+		if [ $? == 0 ]; then
+			diff /tmp/mtd0_loader.bin $LD_FILE
+			if [ $? != 0 ]; then
+				echo -e "loader bin files differ, update loader..."
+				flash_eraseall /dev/mtd0 && nandwrite -p /dev/mtd0 $LD_FILE
+				touch /tmp/need_update_fdt
+			else
+				echo -e "loader is the same, skip update."
+			fi
+		fi
+	fi
+fi
+

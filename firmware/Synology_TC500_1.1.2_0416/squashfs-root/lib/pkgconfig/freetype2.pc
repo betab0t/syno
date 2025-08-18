@@ -1,0 +1,14 @@
+prefix=/dev_fw/source/../source/out
+exec_prefix=/dev_fw/source/../source/out
+libdir=/dev_fw/source/../source/out/lib
+includedir=/dev_fw/source/../source/out/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.2.18
+Requires: 
+Requires.private: 
+Libs: -L/dev_fw/source/../source/out/lib -lfreetype
+Libs.private: 
+Cflags: -I${includedir}/freetype2

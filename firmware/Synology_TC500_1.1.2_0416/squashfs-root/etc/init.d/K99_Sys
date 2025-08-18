@@ -1,0 +1,14 @@
+#!/bin/sh
+
+killall syslogd
+sync
+umount /mnt/SD0
+
+# workaround for reboot issue
+watchdog -T 2 -t 5 /dev/watchdog
+echo "wait watchdog reboot"
+sleep 5
+
+
+echo "K99 power off end"
+

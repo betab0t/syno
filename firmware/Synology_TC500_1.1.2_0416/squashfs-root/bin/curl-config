@@ -1,0 +1,196 @@
+#! /bin/sh
+#***************************************************************************
+#                                  _   _ ____  _
+#  Project                     ___| | | |  _ \| |
+#                             / __| | | | |_) | |
+#                            | (__| |_| |  _ <| |___
+#                             \___|\___/|_| \_\_____|
+#
+# Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
+#
+# This software is licensed as described in the file COPYING, which
+# you should have received as part of this distribution. The terms
+# are also available at https://curl.se/docs/copyright.html.
+#
+# You may opt to use, copy, modify, merge, publish, distribute and/or sell
+# copies of the Software, and permit persons to whom the Software is
+# furnished to do so, under the terms of the COPYING file.
+#
+# This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+# KIND, either express or implied.
+#
+# SPDX-License-Identifier: curl
+#
+###########################################################################
+
+prefix="/dev_fw/source/../source/out"
+exec_prefix=${prefix}
+includedir=${prefix}/include
+cppflag_curl_staticlib=
+
+usage()
+{
+    cat <<EOF
+Usage: curl-config [OPTION]
+
+Available values for OPTION include:
+
+  --built-shared says 'yes' if libcurl was built shared
+  --ca        ca bundle install path
+  --cc        compiler
+  --cflags    pre-processor and compiler flags
+  --checkfor [version] check for (lib)curl of the specified version
+  --configure the arguments given to configure when building curl
+  --features  newline separated list of enabled features
+  --help      display this help and exit
+  --libs      library linking information
+  --prefix    curl install prefix
+  --protocols newline separated list of enabled protocols
+  --ssl-backends output the SSL backends libcurl was built to support
+  --static-libs static libcurl library linking information
+  --version   output version information
+  --vernum    output the version information as a number (hexadecimal)
+EOF
+
+    exit $1
+}
+
+if test $# -eq 0; then
+    usage 1
+fi
+
+while test $# -gt 0; do
+    case "$1" in
+    # this deals with options in the style
+    # --option=value and extracts the value part
+    # [not currently used]
+    -*=*) value=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+    *) value= ;;
+    esac
+
+    case "$1" in
+    --built-shared)
+        echo yes
+        ;;
+
+    --ca)
+        echo 
+        ;;
+
+    --cc)
+        echo "/opt/ivot/arm-ca9-linux-gnueabihf-8.4/usr/bin/arm-ca9-linux-gnueabihf-gcc"
+        ;;
+
+    --prefix)
+        echo "$prefix"
+        ;;
+
+    --feature|--features)
+        for feature in AsynchDNS HSTS HTTPS-proxy IPv6 Largefile NTLM NTLM_WB SSL TLS-SRP UnixSockets alt-svc libz threadsafe ""; do
+            test -n "$feature" && echo "$feature"
+        done
+        ;;
+
+    --protocols)
+        for protocol in DICT FILE FTP FTPS GOPHER GOPHERS HTTP HTTPS IMAP IMAPS MQTT POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP; do
+            echo "$protocol"
+        done
+        ;;
+
+    --version)
+        echo libcurl 7.88.1
+        exit 0
+        ;;
+
+    --checkfor)
+        checkfor=$2
+        cmajor=`echo $checkfor | cut -d. -f1`
+        cminor=`echo $checkfor | cut -d. -f2`
+        # when extracting the patch part we strip off everything after a
+        # dash as that's used for things like version 1.2.3-CVS
+        cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
+
+        vmajor=`echo 7.88.1 | cut -d. -f1`
+        vminor=`echo 7.88.1 | cut -d. -f2`
+        # when extracting the patch part we strip off everything after a
+        # dash as that's used for things like version 1.2.3-CVS
+        vpatch=`echo 7.88.1 | cut -d. -f3 | cut -d- -f1`
+
+        if test "$vmajor" -gt "$cmajor"; then
+            exit 0;
+        fi
+        if test "$vmajor" -eq "$cmajor"; then
+            if test "$vminor" -gt "$cminor"; then
+                exit 0
+            fi
+            if test "$vminor" -eq "$cminor"; then
+                if test "$cpatch" -le "$vpatch"; then
+                    exit 0
+                fi
+            fi
+        fi
+
+        echo "requested version $checkfor is newer than existing 7.88.1"
+        exit 1
+        ;;
+
+    --vernum)
+        echo 075801
+        exit 0
+        ;;
+
+    --help)
+        usage 0
+        ;;
+
+    --cflags)
+        if test "X$cppflag_curl_staticlib" = "X-DCURL_STATICLIB"; then
+          CPPFLAG_CURL_STATICLIB="-DCURL_STATICLIB "
+        else
+          CPPFLAG_CURL_STATICLIB=""
+        fi
+        if test "X${prefix}/include" = "X/usr/include"; then
+          echo "$CPPFLAG_CURL_STATICLIB"
+        else
+          echo "${CPPFLAG_CURL_STATICLIB}-I${prefix}/include"
+        fi
+        ;;
+
+    --libs)
+        if test "X${exec_prefix}/lib" != "X/usr/lib" -a "X${exec_prefix}/lib" != "X/usr/lib64"; then
+           CURLLIBDIR="-L${exec_prefix}/lib "
+        else
+           CURLLIBDIR=""
+        fi
+        if test "Xyes" = "Xno"; then
+          echo ${CURLLIBDIR}-lcurl -lssl -lcrypto -lssl -lcrypto -lz -pthread
+        else
+          echo ${CURLLIBDIR}-lcurl
+        fi
+        ;;
+    --ssl-backends)
+        echo "OpenSSL"
+        ;;
+
+    --static-libs)
+        if test "Xno" != "Xno" ; then
+          echo "${exec_prefix}/lib/libcurl.a" -z now -pie -Wl,-z,relro -Wl,-z,now -L/dev_fw/source/../source/out/lib -L//lib -lssl -lcrypto -lssl -lcrypto -lz -pthread
+        else
+          echo "curl was built with static libraries disabled" >&2
+          exit 1
+        fi
+        ;;
+
+    --configure)
+        echo " '--host=arm-ca9-linux-gnueabihf' '--prefix=/dev_fw/source/../source/out' '--enable-shared=yes' '--enable-static=no' '--with-zlib=/dev_fw/source/../source/out' '--with-ssl=/dev_fw/source/../source/out' '--without-librtmp' '--without-winidn' '--without-libidn' '--without-nghttp2' '--without-zsh-functions-dir' '--enable-ipv6' 'host_alias=arm-ca9-linux-gnueabihf' 'CC=/opt/ivot/arm-ca9-linux-gnueabihf-8.4/usr/bin/arm-ca9-linux-gnueabihf-gcc' 'CFLAGS=-I/dev_fw/source/../source/custom/synology/include -DF_FACTORY_SUPPORT_SYNO_FW_VER -DF_AUTO_RUN_SCRIPT_FILE_IN_SD -DF_AUTO_RUN_IN_FACTORY_MODE -DF_STORAGE_CLEANUP_REGULAR_YEAR_START_FROM_1900 -DF_STORAGE_CLEANUP_NO_SUB_DIR_HOUR -DF_STORAGE_CLEANUPT_DIR_TYPE_DATE_MIXED -DF_STORAGE_CLEANUP_REDUCE_CPU_USAGE -DF_STORAGE_CLEANUP_NO_CHECK_ALL_DIR_NAME -DF_STORAGE_CLEANUP_NO_CHECK_FILE_PERMISSION -DF_STREAMD_DISCONNECT_ALL_CLIENTS_WHEN_USER_ACCOUNT_UPDATED -DF_WIFI_WPA_EAP_SUPPORT -DF_MD_EVENT_NOTIFY_BY_WINDOW -DF_TAMPER_DETECTION -DF_PLAYBACK_PCM_RESAMPLE -DF_AUTO_BACKUP_CONFIG -DF_USE_SYNO_ONVIF_BEHAVIOR -DF_IGNORE_STAND_RESET_BUTTON -DF_SOUND_DETECT -DF_FLUSH_DEV_IPADDR -DF_SUPPORT_NETWORK_WIFI -DF_WPA_SUPPLICANT_EVENT_RECEIVER -DF_SUPPORT_NETWORK_WIRED_EAP -DF_ASSIGN_STATICIP_NO_DHCPIP -DF_ASSIGN_STATICIP_NO_DHCPIP_TIMEOUT=30 -DF_NETWORK_FILTER_SUPPORT_BLACK_WHITE_LIST -DF_AI_SAMPLERATE=48000 -DF_REC_NTP_SYNC_STATUS -DF_ENABLE_SNAPSHOT_TIMESTAMP -DF_WEBD_FORWARD_REQUEST_WITH_BODY_DATA -DF_WEBD_MGSQLEN=10 -DF_WEBD_SYNOLOGY_CUSTOMIZED_AUTH_REQ_HEADER -DF_CHECK_FLASH_WRITE -DF_SUPPORT_UPNP -DF_UPNP_CUSTOM_PROPERTY  -DF_SUPPORT_LIGHT_SENSOR -DF_READ_LIGHT_SENSOR_ALL_THE_TIME -DF_SUPPORT_IRLED -DF_OVERLAY_TEXT_MAXLEN=40 -DF_USE_AUTHORIZATION_NC_VERIFY_HTTP_FIRST_LOGIN -DF_ZONEINFO_ENABLE -DOPENSSL_AFALG_ENGINE_ENABLE -DVIDEO_SOURCE_CHANNEL_NUMBER=1 -DVIDEO_SOURCE_STREAM_NUMBER=2 -DVIDEO_SOURCE_STREAM_INTERVAL= -DAUDIO_SOURCE_CHANNEL_NUMBER=1 -DSYS_ALARM_IN_NUMBER=1 -DSYS_ALARM_OUT_NUMBER=1 -DREC_VALID_BY_UPTIME=60 -DMUSIC_FILE_MAX_NUM=1 -DFWENV_UBOOT_ENV_MTD="\"/dev/mtd4\"" -DFWENV_UBOOT_ENV_OFFSET=0x0 -DFWENV_UBOOT_ENV_SIZE=0x20000 -DFWENV_UBOOT_ENV_ESIZE=0x20000  -DFWENV_PRODUCT_ENV_MTD="\"/dev/mtd5\"" -DFWENV_PRODUCT_ENV_OFFSET=0x0 -DFWENV_PRODUCT_ENV_SIZE=0x40000 -DFWENV_PRODUCT_ENV_ESIZE=0x20000  -DIPC_EVENTCB_BUFSZ=512 -DSHM_FRAME_POOL_SIZE=0x400000 -DAUDIO_INPUT_SAMPLE_RATE=16000 -DF_SUPPORT_ONVIF -DF_FIND_OLDEST_FILE_BY_NAME -DF_UPGRADE_FW_PREPARE -DF_AUD_CODEC_AAC_DISABLED -DMD_MAP_ARRAY_SIZE=72 -DHTTPS_PKI_ENCRYPT=\"ecc\" -DOPENSSL_API_1_1 -I/dev_fw/source/../source -D__NT9856X_PL -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard -ftree-vectorize -fno-builtin -fno-common -Wformat=1 -I/dev_fw/source/../source/custom/synology/include -DF_FACTORY_SUPPORT_SYNO_FW_VER -DF_AUTO_RUN_SCRIPT_FILE_IN_SD -DF_AUTO_RUN_IN_FACTORY_MODE -DF_STORAGE_CLEANUP_REGULAR_YEAR_START_FROM_1900 -DF_STORAGE_CLEANUP_NO_SUB_DIR_HOUR -DF_STORAGE_CLEANUPT_DIR_TYPE_DATE_MIXED -DF_STORAGE_CLEANUP_REDUCE_CPU_USAGE -DF_STORAGE_CLEANUP_NO_CHECK_ALL_DIR_NAME -DF_STORAGE_CLEANUP_NO_CHECK_FILE_PERMISSION -DF_STREAMD_DISCONNECT_ALL_CLIENTS_WHEN_USER_ACCOUNT_UPDATED -DF_WIFI_WPA_EAP_SUPPORT -DF_MD_EVENT_NOTIFY_BY_WINDOW -DF_TAMPER_DETECTION -DF_PLAYBACK_PCM_RESAMPLE -DF_AUTO_BACKUP_CONFIG -DF_USE_SYNO_ONVIF_BEHAVIOR -DF_IGNORE_STAND_RESET_BUTTON -DF_SOUND_DETECT -DF_FLUSH_DEV_IPADDR -DF_SUPPORT_NETWORK_WIFI -DF_WPA_SUPPLICANT_EVENT_RECEIVER -DF_SUPPORT_NETWORK_WIRED_EAP -DF_ASSIGN_STATICIP_NO_DHCPIP -DF_ASSIGN_STATICIP_NO_DHCPIP_TIMEOUT=30 -DF_NETWORK_FILTER_SUPPORT_BLACK_WHITE_LIST -DF_AI_SAMPLERATE=48000 -DF_REC_NTP_SYNC_STATUS -DF_ENABLE_SNAPSHOT_TIMESTAMP -DF_WEBD_FORWARD_REQUEST_WITH_BODY_DATA -DF_WEBD_MGSQLEN=10 -DF_WEBD_SYNOLOGY_CUSTOMIZED_AUTH_REQ_HEADER -DF_CHECK_FLASH_WRITE -DF_SUPPORT_UPNP -DF_UPNP_CUSTOM_PROPERTY  -DF_SUPPORT_LIGHT_SENSOR -DF_READ_LIGHT_SENSOR_ALL_THE_TIME -DF_SUPPORT_IRLED -DF_OVERLAY_TEXT_MAXLEN=40 -DF_USE_AUTHORIZATION_NC_VERIFY_HTTP_FIRST_LOGIN -DF_ZONEINFO_ENABLE -DOPENSSL_AFALG_ENGINE_ENABLE -DVIDEO_SOURCE_CHANNEL_NUMBER=1 -DVIDEO_SOURCE_STREAM_NUMBER=2 -DVIDEO_SOURCE_STREAM_INTERVAL= -DAUDIO_SOURCE_CHANNEL_NUMBER=1 -DSYS_ALARM_IN_NUMBER=1 -DSYS_ALARM_OUT_NUMBER=1 -DREC_VALID_BY_UPTIME=60 -DMUSIC_FILE_MAX_NUM=1 -DFWENV_UBOOT_ENV_MTD="\"/dev/mtd4\"" -DFWENV_UBOOT_ENV_OFFSET=0x0 -DFWENV_UBOOT_ENV_SIZE=0x20000 -DFWENV_UBOOT_ENV_ESIZE=0x20000  -DFWENV_PRODUCT_ENV_MTD="\"/dev/mtd5\"" -DFWENV_PRODUCT_ENV_OFFSET=0x0 -DFWENV_PRODUCT_ENV_SIZE=0x40000 -DFWENV_PRODUCT_ENV_ESIZE=0x20000  -DIPC_EVENTCB_BUFSZ=512 -DSHM_FRAME_POOL_SIZE=0x400000 -DAUDIO_INPUT_SAMPLE_RATE=16000 -DF_SUPPORT_ONVIF -DF_FIND_OLDEST_FILE_BY_NAME -DF_UPGRADE_FW_PREPARE -DF_AUD_CODEC_AAC_DISABLED -DMD_MAP_ARRAY_SIZE=72 -DHTTPS_PKI_ENCRYPT=\"ecc\" -DOPENSSL_API_1_1 -I/dev_fw/source/../source -D__NT9856X_PL -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard -ftree-vectorize -fno-builtin -fno-common -Wformat=1 -fstack-protector-all -fPIE -fPIC -fstack-protector-all -fPIE -fPIC' 'LDFLAGS= -z now -pie  -Wl,-z,relro -Wl,-z,now'"
+        ;;
+
+    *)
+        echo "unknown option: $1"
+        usage 1
+        ;;
+    esac
+    shift
+done
+
+exit 0

@@ -1,0 +1,1234 @@
+{
+    "AI": {
+        "PC": {
+            "Threshold rwrwr-": 3,
+            "TotalNumber rwrwr-": 0
+        },
+        "enable rwrwr-": 0,
+        "modelType rwrwr-": 0
+    },
+    "AudioOutput": {
+        "0": {
+            "Enabled rwrwr-": false,
+            "Gain rwrwr-": 1,
+            "Mute rwrwr-": false,
+            "SampleRate rwrwr-": 16000
+        },
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    },
+    "AudioSource": {
+        "0": {
+            "AudioProfile": {
+                "#": {
+                    "AAC": {
+                        "BitRate rwrwr-": "16k"
+                    },
+                    "AEC": {
+                        "Enabled rwrwr-": false
+                    },
+                    "Codec rwrwr-": "AAC",
+                    "Enabled rwrwr-": true,
+                    "Filter": {
+                        "Enabled rwrwr-": false,
+                        "HighPassFreq rwrwr-": 0,
+                        "LowPassFreq rwrwr-": 0
+                    },
+                    "Name rwrwr-": "",
+                    "SampleRate rwrwr-": 16000
+                },
+                "0": {
+                    "AAC": {
+                        "BitRate rwrwr-": "16k"
+                    },
+                    "AEC": {
+                        "Enabled rwrwr-": false
+                    },
+                    "Codec rwrwr-": "G711U",
+                    "Enabled rwrwr-": true,
+                    "Filter": {
+                        "Enabled rwrwr-": true,
+                        "HighPassFreq rwrwr-": 400,
+                        "LowPassFreq rwrwr-": 4000
+                    },
+                    "G711A": {
+                        "BitRate rwrwr-": "64k"
+                    },
+                    "G711U": {
+                        "BitRate rwrwr-": "64k"
+                    },
+                    "Name rwrwr-": "",
+                    "SampleRate rwrwr-": 16000
+                },
+                "Count r-r-r-": 1,
+                "MaxCount r-r-r-": 1
+            },
+            "DeNoiseLevel rwrwr-": 0.300,
+            "DeNoiseMode rwrwr-": "On",
+            "Enabled rwrwr-": true,
+            "Gain rwrwr-": 0.800,
+            "Mute rwrwr-": false,
+            "SoundDetect": {
+                "0": {
+                    "Enabled rwrwr-": true,
+                    "Sensitivity rwrwr-": 50,
+                    "Threshold rwrwr-": 70
+                },
+                "Count r-r-r-": 1,
+                "Enabled rwrwr-": false,
+                "MaxCount r-r-r-": 1
+            },
+            "Type r-r-r-": "line in"
+        },
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    },
+    "ByPassMode rwrwr-": 0,
+    "Custom": {
+        "Activated rwr-r-": false,
+        "DebugLogLevel rwr-r-": "0",
+        "DebugMode rwr-r-": false,
+        "Dva": {
+            "IntrusionDetection rwr-r-": {
+                "ClassIdFilter rwr-r-": 0,
+                "FenceIntersectType rwr-r-": 0,
+                "FenceLine rwr-r-": "0.3,0.6,0.5,0.5,0.7,0.6",
+                "MinTriggerObjectRatioPermille rwr-r-": 0
+            },
+            "ObjectDetection": {
+                "ClassIdFilter rwr-r-": 0,
+                "CrowdPeopleThreshold rwr-r-": 0,
+                "DetectionRegion rwr-r-": "0,0,0,1,1,1,1,0",
+                "DetectionRegionType rwr-r-": 0,
+                "MinPeopleTriggerTimeSeconds rwr-r-": 0,
+                "MinTriggerObjectRatioPermille rwr-r-": 0,
+                "MinVehicleTriggerTimeSeconds rwr-r-": 0,
+                "TriggeredOnlyBothPeopleVehicle rwr-r-": false,
+                "TriggeredOnlyMovedPeople rwr-r-": false,
+                "TriggeredOnlyMovedVehicle rwr-r-": false
+            },
+            "Threshold": {
+                "Detection rwr-r-": 20,
+                "Tracking rwr-r-": 60
+            }
+        },
+        "Edge": {
+            "DropFrameEdgeEnabled rwr-r-": false,
+            "EventType rwr-r-": 8,
+            "Mode rwr-r-": 2,
+            "StreamNumber rwr-r-": 0
+        },
+        "Exposure": {
+            "Outdoor rwr-r-": true
+        },
+        "Language rwr-r-": "def",
+        "LedIndicator rwr-r-": true,
+        "Name rwr-r-": "TC500",
+        "OperationMode rwr-r-": "svs",
+        "PasswordEditTime rwr-r-": 0,
+        "SmartCodec": {
+            "0": {
+                "TargetFPS rwr-r-": 30,
+                "TargetIFramePeriod rwr-r-": 1
+            },
+            "1": {
+                "TargetFPS rwr-r-": 30,
+                "TargetIFramePeriod rwr-r-": 1
+            },
+            "DynamicFPS rwr-r-": false,
+            "Level rwr-r-": -1,
+            "TargetDenoiseLevel rwrwr-": 0.500,
+            "TargetSharpness rwrwr-": 0.000
+        },
+        "WBMode": "auto"
+    },
+    "DIOPort": {
+        "0": {
+            "Active r-r-r-": false,
+            "Duration rwrwr-": 30,
+            "Name rwrwr-": "DIO1",
+            "Trigger rwrwr-": "close",
+            "Type rwrwr-": "input"
+        },
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    },
+    "Event": {
+        "AI": {
+            "Enable rwrwr-": 1
+        },
+        "Buzzer": {
+            "Enable rwrwr-": 0,
+            "FileName rwrwr-": ""
+        },
+        "MediaProfile rwrwr-": 0,
+        "Motion": {
+            "Enable rwrwr-": 1
+        },
+        "Name rwr-r-": "Event",
+        "NotificationType rwrwr-": "none",
+        "PIR": {
+            "Enable rwrwr-": 1
+        },
+        "RH": {
+            "Enable rwrwr-": 1
+        },
+        "RecordType rwrwr-": "VideoClip",
+        "ScheduleRules rwrw--": "*/00:00-23:59",
+        "Sound": {
+            "Enable rwrwr-": 1
+        },
+        "Temperature": {
+            "Enable rwrwr-": 1
+        }
+    },
+    "Generic": {
+        "Information": {
+            "HostName rwrwr-": "",
+            "Location rwrwr-": ""
+        },
+        "Log": {
+            "CritLevel rwr-r-": true,
+            "DebugLevel rwr-r-": false,
+            "Enabled rwr-r-": true,
+            "LogRotateCount rwr-r-": 10,
+            "LogRotateSize rwr-r-": 200,
+            "LogStorageEnabled rwr-r-": true,
+            "LogToStorage rwr-r-": 0,
+            "NoticeLevel rwr-r-": true,
+            "RemoteEnabled rwr-r-": false,
+            "RemoteServer rwr-r-": "",
+            "WarnLevel rwr-r-": true
+        },
+        "Time": {
+            "DST": {
+                "Enabled rwr-r-": true,
+                "EndDateTime rwr-r-": "",
+                "Offset rwr-r-": "+1:00",
+                "StartDateTime rwr-r-": ""
+            },
+            "Mode rwr-r-": "Zone",
+            "NTP": {
+                "Enabled rwr-r-": true,
+                "Interval rwr-r-": 1,
+                "Server rwr-r-": "time.google.com",
+                "Server1 rwr-r-": ""
+            },
+            "ServerDateTime rwr-r-": "",
+            "SysUpTime rwr-r-": "",
+            "Timezone rwr-r-": "US/Arizona",
+            "TimezoneGMT rwr-r-": "GMT-07:00",
+            "TimezonePOSIX rwr-r-": "USMountainStandardTime7"
+        },
+        "User": {
+            "#": {
+                "Group rwr---": "viewer",
+                "Password rw----": "",
+                "Username rwr---": ""
+            },
+            "0": {
+                "Group rwr---": "admin",
+                "Password rw----": "f7450984de1f09c222f3a1f75638fce3",
+                "Username rwr---": "admin"
+            },
+            "Count r-r---": 1,
+            "MaxCount r-r---": 10,
+            "MinCount r-r---": 1
+        }
+    },
+    "IOPort": {
+        "Input": {
+            "0": {
+                "Active r-r-r-": false,
+                "ConnectDigtialOutputs rwrwr-": "",
+                "ConnectVideoSources rwrwr-": "",
+                "Name rwrwr-": "Remote Control",
+                "Trigger rwrwr-": "close"
+            },
+            "Count r-r-r-": 1,
+            "MaxCount r-r-r-": 1
+        },
+        "Output": {
+            "0": {
+                "Active rwr-r-": false,
+                "ConnectVideoSources rwrwr-": "",
+                "Duration rwrwr-": 30,
+                "Enabled rwrwr-": false,
+                "LiveDuration rwr-r-": 0,
+                "Name rwr-r-": "Remote Control"
+            },
+            "Count r-r-r-": 1,
+            "MaxCount r-r-r-": 1
+        }
+    },
+    "IRLED": {
+        "Enabled rwr-r-": true,
+        "Intensity rwr-r-": 90,
+        "Status r-r-r-": false
+    },
+    "LED": {
+        "Enabled rwr-r-": true,
+        "Intensity rwr-r-": 10
+    },
+    "Media": {
+        "#": {
+            "AudioProfile rwrwr-": -1,
+            "AudioSource rwrwr-": -1,
+            "FileFormat rwrwr-": "mp4",
+            "FileNameFormat rwrwr-": "%Y-%M-%D _%H%-M-%S_%E_%T",
+            "MaxFileLength rwrwr-": 3600,
+            "MaxFileLengthUnit rwrwr-": "time",
+            "Name rwrwr-": "mediaformodify",
+            "PostEventTime rwrwr-": 30,
+            "PreEventTime rwrwr-": 5,
+            "SnapShotInterval rwrwr-": 1,
+            "Storage rwrwr-": -1,
+            "Type rwrwr-": "VideoClip",
+            "VideoProfile rwrwr-": -1,
+            "VideoSource rwrwr-": -1
+        },
+        "0": {
+            "AudioProfile rwrwr-": -1,
+            "AudioSource rwrwr-": -1,
+            "FileFormat rwrwr-": "mp4",
+            "FileNameFormat rwrwr-": "%Y%m%d_%H%M%S",
+            "MaxFileLength rwrwr-": 120,
+            "MaxFileLengthUnit rwrwr-": "time",
+            "Name rwrwr-": "media-1",
+            "PostEventTime rwrwr-": 5,
+            "PreEventTime rwrwr-": 5,
+            "SnapShotInterval rwrwr-": 5,
+            "Storage rwrwr-": 0,
+            "Type rwrwr-": "VideoClip",
+            "VideoProfile rwrwr-": 0,
+            "VideoSource rwrwr-": 0
+        },
+        "1": {
+            "AudioProfile rwrwr-": -1,
+            "AudioSource rwrwr-": -1,
+            "FileFormat rwrwr-": "mp4",
+            "FileNameFormat rwrwr-": "%Y%m%d_%H%M%S",
+            "MaxFileLength rwrwr-": 100,
+            "MaxFileLengthUnit rwrwr-": "size",
+            "Name rwrwr-": "media-2",
+            "PostEventTime rwrwr-": 10,
+            "PreEventTime rwrwr-": 3,
+            "SnapShotInterval rwrwr-": 5,
+            "Storage rwrwr-": -1,
+            "Type rwrwr-": "VideoClip",
+            "VideoProfile rwrwr-": 1,
+            "VideoSource rwrwr-": 0
+        },
+        "Count r-r-r-": 2,
+        "MaxCount r-r-r-": 2
+    },
+    "Network": {
+        "0": {
+            "BootProto rwr-r-": "dhcp",
+            "ConnectionType r-r-r-": "wired",
+            "DHCP": {
+                "DNSServer1 r-r-r-": "",
+                "DNSServer2 r-r-r-": "",
+                "Gateway r-r-r-": "",
+                "IPAddress r-r-r-": "",
+                "IPv6DNSServer1 r-r-r-": "",
+                "IPv6DNSServer2 r-r-r-": "",
+                "IPv6Gateway r-r-r-": "",
+                "IPv6IPAddress r-r-r-": "",
+                "IPv6Prefix r-r-r-": 64,
+                "SubnetMask r-r-r-": ""
+            },
+            "DNSAlive r-r-r-": false,
+            "EAP": {
+                "CACert rwr-r-": "/data/app/eap/ca.pem",
+                "CACertUpdateTime rwr-r-": 0,
+                "EAP rwr-r-": "",
+                "Identity rwr-r-": "",
+                "Password rwr-r-": "",
+                "Phase1 rwr-r-": "",
+                "Phase2 rwr-r-": "auth=MSCHAPV2",
+                "PrivateKey rwr-r-": "/data/app/eap/client.p12",
+                "PrivateKeyPasswd rwr-r-": "",
+                "UserCertUpdateTime rwr-r-": 0
+            },
+            "GatewayAlive r-r-r-": false,
+            "IPv6BootProto rwr-r-": "off",
+            "IPv6DNSAlive r-r-r-": false,
+            "IPv6GatewayAlive r-r-r-": false,
+            "LinkLocal": {
+                "IPAddress r-r-r-": "",
+                "IPv6IPAddress r-r-r-": "",
+                "IPv6Prefix r-r-r-": 64,
+                "SubnetMask r-r-r-": ""
+            },
+            "LinkState r-r-r-": false,
+            "MACAddress r-r-r-": "xx:xx:xx:xx:xx:xx",
+            "Mode r-r-r-": "",
+            "Name r-r-r-": "eth0",
+            "PPPoE": {
+                "DNSServer1 r-r-r-": "",
+                "DNSServer2 r-r-r-": "",
+                "Enabled rwr-r-": false,
+                "Gateway r-r-r-": "",
+                "IPAddress r-r-r-": "",
+                "IPv6DNSServer1 r-r-r-": "",
+                "IPv6DNSServer2 r-r-r-": "",
+                "IPv6Enabled rwr-r-": false,
+                "IPv6Gateway r-r-r-": "",
+                "IPv6IPAddress r-r-r-": "",
+                "IPv6Prefix r-r-r-": 64,
+                "Password rw----": "",
+                "Status r-r-r-": "",
+                "SubnetMask r-r-r-": "",
+                "Username rw----": ""
+            },
+            "SecurityMode rwr-r-": "",
+            "Speed r-r-r-": "",
+            "Static": {
+                "DNSServer1 rwr-r-": "168.95.1.1",
+                "DNSServer2 rwr-r-": "168.95.192.1",
+                "DNSServer3 rwr-r-": "",
+                "DNSServer4 rwr-r-": "",
+                "Gateway rwr-r-": "192.168.0.1",
+                "IPAddress rwr-r-": "192.168.0.50",
+                "IPv6DNSServer1 rwr-r-": "2001:4860:4860::8888",
+                "IPv6DNSServer2 rwr-r-": "2001:4860:4860::8844",
+                "IPv6Gateway rwr-r-": "2001::1",
+                "IPv6IPAddress rwr-r-": "2001::100",
+                "IPv6Prefix rwr-r-": 64,
+                "SubnetMask rwr-r-": "255.255.255.0"
+            },
+            "Static2": {
+                "Enabled rwr-r-": false,
+                "Gateway rwr-r-": "",
+                "IPAddress rwr-r-": "192.168.1.10",
+                "IPv6Gateway rwr-r-": "",
+                "IPv6IPAddress rwr-r-": "",
+                "IPv6Prefix rwr-r-": 64,
+                "SubnetMask rwr-r-": "255.255.255.0"
+            }
+        },
+        "Cloud": {
+            "DeviceID r-r-r-": "",
+            "Enabled rwrwr-": false
+        },
+        "Count r-r-r-": 1,
+        "Diagnosis r-r-r-": "",
+        "Filter": {
+            "Address": {
+                "#": {
+                    "Activity rwr-r-": "",
+                    "Address rwr-r-": "",
+                    "CreatedTime rwr-r-": 0,
+                    "Protocol rwr-r-": "",
+                    "Rule rwr-r-": ""
+                },
+                "Count r-r-r-": 0,
+                "MaxCount r-r-r-": 1024
+            },
+            "AutoBlock": {
+                "Duration rwr-r-": 10,
+                "Enabled rwr-r-": true,
+                "Times rwr-r-": 5
+            },
+            "DropIcmp4 rwr-r-": false,
+            "DropIcmp6 rwr-r-": false,
+            "Enabled rwr-r-": true,
+            "Policy4 rwr-r-": "allow",
+            "Policy6 rwr-r-": "allow"
+        },
+        "HTTP": {
+            "Authentication rwr-r-": "digest",
+            "Domain rwr-r-": "IPCam",
+            "Enabled rwr-r-": false,
+            "Port rwr-r-": 80,
+            "Port2 rwr-r-": 0
+        },
+        "HTTPS": {
+            "CertificateAvailable r-r-r-": false,
+            "CertificateSubject r-r-r-": "",
+            "Enabled rwr-r-": true,
+            "Port rwr-r-": 443
+        },
+        "Internet": {
+            "Alive r-r-r-": false,
+            "URL1 rwrwr-": "",
+            "URL2 rwrwr-": "",
+            "URL3 rwrwr-": ""
+        },
+        "MaxCount r-r-r-": 1,
+        "ONVIF": {
+            "Enabled rwr-r-": false,
+            "Port rwr-r-": 8080
+        },
+        "Streaming": {
+            "RTSP": {
+                "Authentication rwr-r-": "digest",
+                "Enabled rwr-r-": true,
+                "EndRTPPort rwr-r-": 20000,
+                "MaxViewers rwr-r-": 4,
+                "Path": {
+                    "#": {
+                        "AccessName rwr-r-": "",
+                        "AudioProfile rwr-r-": -1,
+                        "AudioSource rwr-r-": -1,
+                        "VideoProfile rwr-r-": -1,
+                        "VideoSource rwr-r-": -1
+                    },
+                    "0": {
+                        "AccessName rwr-r-": "1",
+                        "AudioProfile rwr-r-": 0,
+                        "AudioSource rwr-r-": 0,
+                        "VideoProfile rwr-r-": 0,
+                        "VideoSource rwr-r-": 0
+                    },
+                    "1": {
+                        "AccessName rwr-r-": "2",
+                        "AudioProfile rwr-r-": 0,
+                        "AudioSource rwr-r-": 0,
+                        "VideoProfile rwr-r-": 1,
+                        "VideoSource rwr-r-": 0
+                    },
+                    "Count r-r-r-": 2,
+                    "MaxCount r-r-r-": 2
+                },
+                "Port rwr-r-": 554,
+                "StartRTPPort rwr-r-": 10000,
+                "TLSEnabled rwr-r-": false,
+                "TLSPort rwr-r-": 322
+            }
+        },
+        "UPnP": {
+            "DeviceType r-r-r-": "IPCamera",
+            "Enabled rwr-r-": true,
+            "FriendlyName rwr-r-": "TC500"
+        }
+    },
+    "NoticeMessage": {
+        "DNS": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        },
+        "Firmware": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        },
+        "NTP": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        },
+        "NetSpeed": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        },
+        "SD": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        },
+        "SMB": {
+            "Enable rwrwr-": true,
+            "Status r-r-r-": "",
+            "Time r-r-r-": 0
+        }
+    },
+    "OnlineUser": {
+        "Http r-r-r-": 0,
+        "Local r-r-r-": 0,
+        "Rtsp r-r-r-": 0,
+        "RtspPath0 r-r-r-": 0,
+        "RtspPath1 r-r-r-": 0,
+        "Total r-r-r-": 0
+    },
+    "PTZ": {
+        "0": {
+            "Address rwr-r-": 0,
+            "FocusSpeed rwr-r-": 5,
+            "GuardTour": {
+                "#": {
+                    "Interval rwr-r-": 10,
+                    "Sequence rwr-r-": ""
+                },
+                "ActiveTour rwr-r-": -1,
+                "Count r-r-r-": 0,
+                "MaxCount r-r-r-": 8
+            },
+            "HomePos rwr-r-": 0,
+            "PanSpeed rwr-r-": 5,
+            "PatrolSpeed rwr-r-": 5,
+            "PresetPos": {
+                "#": {
+                    "Label rwrwr-": "",
+                    "Pos rwr-r-": ""
+                },
+                "Count r-r-r-": 0,
+                "MaxCount r-r-r-": 16
+            },
+            "TiltSpeed rwr-r-": 5,
+            "Type r-r-r-": "Serial0",
+            "ZoomSpeed rwr-r-": 5
+        },
+        "ControlLevel rwr-r-": "Operator",
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    },
+    "Property": {
+        "Audio": {
+            "Input r-r-r-": true,
+            "Output r-r-r-": false
+        },
+        "Firmware": {
+            "BuildDate r-r-r-": "",
+            "ConfigVersion r-r-r-": 2,
+            "LastUpdateTime r-r-r-": "",
+            "MinimumVersion r-r-r-": "1.1.1-0383",
+            "MinorVersion r-r-r-": "24.06.04",
+            "OCX r-r-r-": "",
+            "SynoBuildNumber r-r-r-": "0416",
+            "SynoVersion r-r-r-": "1.1.2",
+            "Version r-r-r-": "1.0.61",
+            "Web r-r-r-": ""
+        },
+        "Hardware": {
+            "LEDSDCard r-r-r-": "",
+            "LEDStatus r-r-r-": "",
+            "LEDUSB r-r-r-": "",
+            "Platform r-r-r-": "",
+            "Version r-r-r-": "1.0"
+        },
+        "Network": {
+            "Wireless r-r-r-": "false"
+        },
+        "PTZ": {
+            "DPTZ r-r-r-": false,
+            "PTZ r-r-r-": false
+        },
+        "Product": {
+            "Brand r-r-r-": "SYNOLOGY",
+            "Device r-r-r-": "IP Camera",
+            "Manufacturer r-r-r-": "Synology",
+            "ManufacturerURL r-r-r-": "https://www.synology.com",
+            "Model r-r-r-": "TC500",
+            "ModelDescript r-r-r-": "Synology Camera TC500",
+            "ModelNumber r-r-r-": "TC500",
+            "Project r-r-r-": "",
+            "SerialNumber r-r-r-": "",
+            "Series r-r-r-": "TC",
+            "UUID r-r-r-": "",
+            "Vendor r-r-r-": "Synology"
+        },
+        "VideoOutput": {
+            "Interface r-r-r-": ""
+        }
+    },
+    "Recorder": {
+        "0": {
+            "Enabled rwr-r-": false,
+            "FileType rwrwr-": "mp4",
+            "FolderName rwr-r-": "/recording/%Y%m%d/",
+            "MediaProfile rwrwr-": 0,
+            "Name rwr-r-": "",
+            "ScheduleRules rwrw--": "*/00:00-23:59",
+            "StopRecordCondition r-r-r-": "",
+            "StorageType rwrw--": "SD0",
+            "TempFolderName rwr-r-": ""
+        },
+        "1": {
+            "Enabled rwr-r-": false,
+            "FileType rwrwr-": "mp4",
+            "FolderName rwr-r-": "/recording/Manual/%Y%m%d/",
+            "MediaProfile rwrwr-": 0,
+            "Name rwr-r-": "",
+            "ScheduleRules rwrw--": "*/00:00-23:59",
+            "StopRecordCondition r-r-r-": "REBOOT|FULL",
+            "StorageType rwrw--": "SD0",
+            "TempFolderName rwr-r-": ""
+        },
+        "Count r-r-r-": 2,
+        "MaxCount r-r-r-": 2,
+        "WorkMode r-r-r-": "dependent"
+    },
+    "SMTP": {
+        "Auth rwr-r-": 0,
+        "MailCC rwr-r-": "",
+        "MailFrom rwr-r-": "",
+        "MailTo rwr-r-": "",
+        "Password rwr-r-": "",
+        "Port rwr-r-": 25,
+        "SSL rwr-r-": 0,
+        "Server rwr-r-": "",
+        "Username rwr-r-": ""
+    },
+    "Sensor": {
+        "LightSensor": {
+            "DayToNightValue rwr-r-": 0.150,
+            "DelayTime rwr-r-": 5,
+            "NightColor rwr-r-": "BlackWhite",
+            "NightMode rwr-r-": "Auto",
+            "NightToDayValue rwr-r-": 1.800,
+            "ScheduleRules rwr-r-": "*/18:00-05:59",
+            "ValueType rwr-r-": "LuxVal"
+        }
+    },
+    "Serial": {
+        "0": {
+            "BaudRate rwr-r-": 2400,
+            "Bias rwr-r-": false,
+            "DataBits rwr-r-": 8,
+            "Parity rwr-r-": "none",
+            "Protocol rwr-r-": "Pelco-D",
+            "Purpose rwr-r-": "PTZ",
+            "StopBits rwr-r-": 1,
+            "Termination rwr-r-": false
+        },
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    },
+    "Storage": {
+        "0": {
+            "AutoDiskCleanup rwr-r-": true,
+            "AutoFormat rwr-r-": false,
+            "CleanSize rwr-r-": 100,
+            "FileKeepDays rwr-r-": 0,
+            "FileSystem r-r-r-": "exfat",
+            "FreeSize r-r-r-": 0,
+            "LookupSpecifyRootDirFmt r-r-r-": "recording",
+            "MinRemainSize rwr-r-": 500,
+            "Path r-r-r-": "/mnt/SD0",
+            "RemainPercentage rwr-r-": 5,
+            "RemainSize rwr-r-": 500,
+            "Status r-r-r-": "DEACTIVE",
+            "TotalSize r-r-r-": 0,
+            "Type r-r-r-": "SD0",
+            "UsedSize r-r-r-": 0
+        },
+        "1": {
+            "AutoDiskCleanup rwr-r-": false,
+            "AutoFormat rwr-r-": false,
+            "CleanSize rwr-r-": 100,
+            "FileKeepDays rwr-r-": 0,
+            "FileSystem r-r-r-": "cifs",
+            "FreeSize r-r-r-": 0,
+            "LookupSpecifyRootDirFmt r-r-r-": "recording",
+            "MinRemainSize rwr-r-": 200,
+            "NetDiskInfo": {
+                "AnonymousMode rwr-r-": false,
+                "Hostname rwr-r-": "",
+                "LimitUseSize rwr-r-": 1,
+                "Password rwr-r-": "",
+                "ShareFolderPath rwr-r-": "",
+                "Status r-r-r-": "NO_SET",
+                "Username rwr-r-": ""
+            },
+            "Path r-r-r-": "/mnt/smb",
+            "RemainPercentage rwr-r-": 5,
+            "RemainSize rwr-r-": 200,
+            "Status r-r-r-": "DEACTIVE",
+            "TotalSize r-r-r-": 0,
+            "Type r-r-r-": "CIFS",
+            "UsedSize r-r-r-": 0
+        },
+        "2": {
+            "AutoDiskCleanup rwr-r-": false,
+            "AutoFormat rwr-r-": false,
+            "CleanSize rwr-r-": 8,
+            "FileKeepDays rwr-r-": 0,
+            "FileSystem r-r-r-": "",
+            "FreeSize r-r-r-": 0,
+            "MinRemainSize rwr-r-": 8,
+            "Path r-r-r-": "/mnt/ramdisk",
+            "RemainPercentage rwr-r-": 0,
+            "RemainSize rwr-r-": 8,
+            "Status r-r-r-": "DEACTIVE",
+            "TotalSize r-r-r-": 0,
+            "Type r-r-r-": "TMP",
+            "UsedSize r-r-r-": 0
+        },
+        "Count r-r-r-": 3,
+        "MaxCount r-r-r-": 3,
+        "NotificationType rwrwr-": "none"
+    },
+    "VideoSource": {
+        "0": {
+            "Enabled rwrwr-": true,
+            "ISP": {
+                "AWBRatioB rwrwr-": 0,
+                "AWBRatioR rwrwr-": 0,
+                "Brightness rwrwr-": 0,
+                "Capability": {
+                    "AWBRatioBMax r-r-r-": 1,
+                    "AWBRatioBMin r-r-r-": -1,
+                    "AWBRatioRMax r-r-r-": 1,
+                    "AWBRatioRMin r-r-r-": -1,
+                    "BitRateKbps r-r-r-": [
+                        "1024-8192",
+                        "512-2048"
+                    ],
+                    "BrightnessMax r-r-r-": 1,
+                    "BrightnessMin r-r-r-": -1,
+                    "Color r-r-r-": [
+                        "Auto",
+                        "Color",
+                        "Mono"
+                    ],
+                    "ContrastMax r-r-r-": 1,
+                    "ContrastMin r-r-r-": -1,
+                    "DeNoiseLevelMax r-r-r-": 1.000,
+                    "DeNoiseLevelMin r-r-r-": 0,
+                    "DeNoiseMode r-r-r-": [
+                        "Auto",
+                        "Manual"
+                    ],
+                    "FPS r-r-r-": [
+                        "5-30",
+                        "5-30"
+                    ],
+                    "HueMax r-r-r-": 1,
+                    "HueMin r-r-r-": -1,
+                    "MWBBGainMax r-r-r-": 1,
+                    "MWBBGainMin r-r-r-": 0,
+                    "MWBGGainMax r-r-r-": 1,
+                    "MWBGGainMin r-r-r-": 0,
+                    "MWBRGainMax r-r-r-": 1,
+                    "MWBRGainMin r-r-r-": 0,
+                    "Resolution r-r-r-": [
+                        [
+                            "2880x1620",
+                            "2560x1440",
+                            "2304x1296",
+                            "1920x1080",
+                            "1280x720"
+                        ],
+                        [
+                            "1920x1080",
+                            "1280x720"
+                        ]
+                    ],
+                    "SaturationMax r-r-r-": 1,
+                    "SaturationMin r-r-r-": -1,
+                    "SharpnessMax r-r-r-": 1,
+                    "SharpnessMin r-r-r-": -1,
+                    "WBMode r-r-r-": [
+                        "Auto",
+                        "Manual"
+                    ],
+                    "WDRLevelMax r-r-r-": 1.000,
+                    "WDRLevelMin r-r-r-": 0,
+                    "WDRMode r-r-r-": [
+                        "Auto",
+                        "Manual",
+                        "Off"
+                    ]
+                },
+                "Color rwrwr-": "Auto",
+                "Contrast rwrwr-": 0,
+                "CurrentLum r-r-r-": 0,
+                "DeNoise3DNRLevel rwrwr-": 0.500,
+                "DeNoiseLevel rwrwr-": 0.500,
+                "DeNoiseMode rwrwr-": "Auto",
+                "Default": {
+                    "AWBRatioB r-r-r-": 0,
+                    "AWBRatioR r-r-r-": 0,
+                    "Brightness r-r-r-": 0,
+                    "Color r-r-r-": "Auto",
+                    "Contrast r-r-r-": 0,
+                    "DeNoiseLevel r-r-r-": 0,
+                    "DeNoiseMode r-r-r-": "Auto",
+                    "Hue r-r-r-": 0,
+                    "LDC rwrwr-": false,
+                    "MWBBGain r-r-r-": 0.100,
+                    "MWBGGain r-r-r-": 0.100,
+                    "MWBRGain r-r-r-": 0.100,
+                    "NightVisionStatus r-r-r-": false,
+                    "Saturation r-r-r-": 0,
+                    "Sharpness r-r-r-": 0,
+                    "WBMode r-r-r-": "Auto",
+                    "WDRLevel r-r-r-": 1.000,
+                    "WDRLevelNight rwr-r-": 1.000,
+                    "WDRMode r-r-r-": "Auto"
+                },
+                "Deflicker rwrwr-": false,
+                "ExposureMode rwrwr-": "Auto",
+                "FixedGain rwrwr-": 100,
+                "FixedShutterSpeed rwrwr-": 60,
+                "HDREnabled rwrwr-": true,
+                "Hue rwrwr-": 0,
+                "LDC rwrwr-": false,
+                "MWBBGain rwrwr-": 0.120,
+                "MWBGGain rwrwr-": 0.120,
+                "MWBRGain rwrwr-": 0.120,
+                "MaxGain rwrwr-": 25600,
+                "MaxNightGain rwrwr-": 25600,
+                "MaxNightShutterSpeed rwrwr-": 60,
+                "MaxShutterSpeed rwrwr-": 60,
+                "MinGain rwrwr-": 100,
+                "MinNightGain rwrwr-": 100,
+                "MinNightShutterSpeed rwrwr-": 16000,
+                "MinShutterSpeed rwrwr-": 16000,
+                "NightExposure rwrwr-": false,
+                "NightVisionStatus r-r-r-": false,
+                "PowerFrequency rwrwr-": 60,
+                "Saturation rwrwr-": 0,
+                "Sharpness rwrwr-": 0,
+                "WBMode rwrwr-": "Auto",
+                "WDRLevel rwr-r-": 1.000,
+                "WDRLevelNight rwr-r-": 1.000,
+                "WDRMode rwr-r-": "Auto"
+            },
+            "Image": {
+                "DeInterlace rwrwr-": true,
+                "DetectedType rwr-r-": "",
+                "FPS r-r-r-": 30,
+                "Flip rwrwr-": false,
+                "GOPEnabled rwrwr-": false,
+                "Mirror rwrwr-": false,
+                "Progressive r-r-r-": true,
+                "Resolution r-r-r-": "2880x1620",
+                "Rotate rwrwr-": 0,
+                "Status r-r-r-": "DEACTIVE"
+            },
+            "Motion": {
+                "0": {
+                    "Bottom rwrwr-": 10000,
+                    "Enabled rwrwr-": true,
+                    "Left rwrwr-": 0,
+                    "Name rwrwr-": "",
+                    "Right rwrwr-": 10000,
+                    "Sensitivity rwrwr-": 50,
+                    "SensitivityNight rwrwr-": 50,
+                    "Threshold rwrwr-": 50,
+                    "Top rwrwr-": 0
+                },
+                "1": {
+                    "Bottom rwrwr-": 0,
+                    "Enabled rwrwr-": false,
+                    "Left rwrwr-": 0,
+                    "Name rwrwr-": "",
+                    "Right rwrwr-": 0,
+                    "Sensitivity rwrwr-": 50,
+                    "SensitivityNight rwrwr-": 50,
+                    "Threshold rwrwr-": 50,
+                    "Top rwrwr-": 0
+                },
+                "2": {
+                    "Bottom rwrwr-": 0,
+                    "Enabled rwrwr-": false,
+                    "Left rwrwr-": 0,
+                    "Name rwrwr-": "",
+                    "Right rwrwr-": 0,
+                    "Sensitivity rwrwr-": 50,
+                    "SensitivityNight rwrwr-": 50,
+                    "Threshold rwrwr-": 50,
+                    "Top rwrwr-": 0
+                },
+                "3": {
+                    "Bottom rwrwr-": 0,
+                    "Enabled rwrwr-": false,
+                    "Left rwrwr-": 0,
+                    "Name rwrwr-": "",
+                    "Right rwrwr-": 0,
+                    "Sensitivity rwrwr-": 50,
+                    "SensitivityNight rwrwr-": 50,
+                    "Threshold rwrwr-": 50,
+                    "Top rwrwr-": 0
+                },
+                "Count r-r-r-": 4,
+                "Enabled rwrwr-": true,
+                "MaxCount r-r-r-": 4,
+                "ObjDetect": {
+                    "SizeThreshold rwr-r-": 72
+                },
+                "Tamper": {
+                    "Enabled rwrwr-": true,
+                    "Threshold rwrwr-": 75,
+                    "ThresholdNight rwrwr-": 75
+                }
+            },
+            "Overlay": {
+                "PrivacyMask": {
+                    "0": {
+                        "Bottom rwrwr-": 4000,
+                        "Color rwrwr-": "black",
+                        "Enabled rwrwr-": false,
+                        "Left rwrwr-": 1000,
+                        "Name rwrwr-": "privacy1",
+                        "Polygon": {
+                            "Points rwrwr-": [
+                                {
+                                    "X rwrwr-": 1000,
+                                    "Y rwrwr-": 2000
+                                },
+                                {
+                                    "X rwrwr-": 1000,
+                                    "Y rwrwr-": 4000
+                                },
+                                {
+                                    "X rwrwr-": 3000,
+                                    "Y rwrwr-": 4000
+                                },
+                                {
+                                    "X rwrwr-": 3000,
+                                    "Y rwrwr-": 2000
+                                }
+                            ]
+                        },
+                        "Right rwrwr-": 3000,
+                        "Top rwrwr-": 2000
+                    },
+                    "1": {
+                        "Bottom rwrwr-": 5000,
+                        "Color rwrwr-": "black",
+                        "Enabled rwrwr-": false,
+                        "Left rwrwr-": 2000,
+                        "Name rwrwr-": "privacy2",
+                        "Polygon": {
+                            "Points rwrwr-": [
+                                {
+                                    "X rwrwr-": 2000,
+                                    "Y rwrwr-": 3000
+                                },
+                                {
+                                    "X rwrwr-": 2000,
+                                    "Y rwrwr-": 5000
+                                },
+                                {
+                                    "X rwrwr-": 4000,
+                                    "Y rwrwr-": 5000
+                                },
+                                {
+                                    "X rwrwr-": 4000,
+                                    "Y rwrwr-": 3000
+                                }
+                            ]
+                        },
+                        "Right rwrwr-": 4000,
+                        "Top rwrwr-": 3000
+                    },
+                    "2": {
+                        "Bottom rwrwr-": 6000,
+                        "Color rwrwr-": "black",
+                        "Enabled rwrwr-": false,
+                        "Left rwrwr-": 3000,
+                        "Name rwrwr-": "privacy3",
+                        "Polygon": {
+                            "Points rwrwr-": [
+                                {
+                                    "X rwrwr-": 3000,
+                                    "Y rwrwr-": 4000
+                                },
+                                {
+                                    "X rwrwr-": 3000,
+                                    "Y rwrwr-": 6000
+                                },
+                                {
+                                    "X rwrwr-": 5000,
+                                    "Y rwrwr-": 6000
+                                },
+                                {
+                                    "X rwrwr-": 5000,
+                                    "Y rwrwr-": 4000
+                                }
+                            ]
+                        },
+                        "Right rwrwr-": 5000,
+                        "Top rwrwr-": 4000
+                    },
+                    "3": {
+                        "Bottom rwrwr-": 7000,
+                        "Color rwrwr-": "black",
+                        "Enabled rwrwr-": false,
+                        "Left rwrwr-": 4000,
+                        "Name rwrwr-": "privacy4",
+                        "Polygon": {
+                            "Points rwrwr-": [
+                                {
+                                    "X rwrwr-": 4000,
+                                    "Y rwrwr-": 5000
+                                },
+                                {
+                                    "X rwrwr-": 4000,
+                                    "Y rwrwr-": 7000
+                                },
+                                {
+                                    "X rwrwr-": 6000,
+                                    "Y rwrwr-": 7000
+                                },
+                                {
+                                    "X rwrwr-": 6000,
+                                    "Y rwrwr-": 5000
+                                }
+                            ]
+                        },
+                        "Right rwrwr-": 6000,
+                        "Top rwrwr-": 5000
+                    },
+                    "4": {
+                        "Bottom rwrwr-": 8000,
+                        "Color rwrwr-": "black",
+                        "Enabled rwrwr-": false,
+                        "Left rwrwr-": 5000,
+                        "Name rwrwr-": "privacy5",
+                        "Polygon": {
+                            "Points rwrwr-": [
+                                {
+                                    "X rwrwr-": 5000,
+                                    "Y rwrwr-": 6000
+                                },
+                                {
+                                    "X rwrwr-": 5000,
+                                    "Y rwrwr-": 8000
+                                },
+                                {
+                                    "X rwrwr-": 7000,
+                                    "Y rwrwr-": 8000
+                                },
+                                {
+                                    "X rwrwr-": 7000,
+                                    "Y rwrwr-": 6000
+                                }
+                            ]
+                        },
+                        "Right rwrwr-": 7000,
+                        "Top rwrwr-": 6000
+                    },
+                    "Capability": {
+                        "Polygon": {
+                            "PointsMax r-r-r-": 4,
+                            "PointsMin r-r-r-": 4
+                        },
+                        "Type r-r-r-": [
+                            "Basic",
+                            "Polygon"
+                        ]
+                    },
+                    "Count r-r-r-": 5,
+                    "Enabled rwrwr-": false,
+                    "MaxCount r-r-r-": 5,
+                    "Type r-r-r-": "Basic"
+                },
+                "Text": {
+                    "AlertEnabled rwrwr-": false,
+                    "AlertText rwrwr-": "",
+                    "BGColor rwrwr-": "black",
+                    "Color rwrwr-": "white",
+                    "DateEnabled rwrwr-": true,
+                    "DateFormat rwrwr-": "YYYY/MM/DD",
+                    "DateTimePosition rwrwr-": "left-top",
+                    "Enabled rwrwr-": true,
+                    "FontSize rwrwr-": "small",
+                    "MarginRatioH rwrwr-": 1,
+                    "MarginRatioV rwrwr-": 1,
+                    "Text rwrwr-": "location 1",
+                    "TextEnabled rwrwr-": false,
+                    "TextPosition rwrwr-": "left-top",
+                    "TimeEnabled rwrwr-": true,
+                    "TimeFormat rwrwr-": 24,
+                    "Transparent rwrwr-": 50
+                }
+            },
+            "VideoProfile": {
+                "#": {
+                    "Codec rwrwr-": "H264",
+                    "Enabled rwrwr-": true,
+                    "FPS rwrwr-": 3,
+                    "H264": {
+                        "BitRate rwrwr-": 120,
+                        "EVBR": {
+                            "MotionAQStr rwrwr-": -6,
+                            "StaticTime rwrwr-": 0
+                        },
+                        "GOPLength rwrwr-": 30,
+                        "IFramePeriod rwrwr-": 3,
+                        "MaxBitRate rwrwr-": 4096,
+                        "MaxQuality rwrwr-": 10,
+                        "MinQuality rwrwr-": 0,
+                        "Profile rwrwr-": "Main",
+                        "Quality rwrwr-": 5,
+                        "RateControl rwrwr-": "cbr",
+                        "VBR": {
+                            "ChangePos rwrwr-": 0,
+                            "MotionAQStr rwrwr-": 0,
+                            "StaticTime rwrwr-": 0
+                        }
+                    },
+                    "MJPEG": {
+                        "MaxBitRate rwrwr-": 4096,
+                        "Quality rwrwr-": 5
+                    },
+                    "Name rwrwr-": "",
+                    "Resolution rwrwr-": "320x240"
+                },
+                "0": {
+                    "Codec rwrwr-": "H264",
+                    "Enabled rwrwr-": true,
+                    "FPS rwrwr-": 15,
+                    "H264": {
+                        "BitRate rwrwr-": 8192,
+                        "EVBR": {
+                            "MotionAQStr rwrwr-": -6,
+                            "StaticTime rwrwr-": 0
+                        },
+                        "GOPLength rwrwr-": 30,
+                        "IFramePeriod rwrwr-": 1,
+                        "MaxBitRate rwrwr-": 8192,
+                        "MaxQuality rwrwr-": 10,
+                        "MinQuality rwrwr-": 0,
+                        "Profile rwrwr-": "High",
+                        "Quality rwrwr-": 8,
+                        "RateControl rwrwr-": "mbr",
+                        "VBR": {
+                            "ChangePos rwrwr-": 80,
+                            "MotionAQStr rwrwr-": 0,
+                            "StaticTime rwrwr-": 0
+                        }
+                    },
+                    "MJPEG": {
+                        "MaxBitRate rwrwr-": 4096,
+                        "Quality rwrwr-": 5
+                    },
+                    "Name rwrwr-": "stream 1",
+                    "Resolution rwrwr-": "2880x1620"
+                },
+                "1": {
+                    "Codec rwrwr-": "H264",
+                    "Enabled rwrwr-": true,
+                    "FPS rwrwr-": 15,
+                    "H264": {
+                        "BitRate rwrwr-": 2048,
+                        "EVBR": {
+                            "MotionAQStr rwrwr-": -6,
+                            "StaticTime rwrwr-": 0
+                        },
+                        "GOPLength rwrwr-": 15,
+                        "IFramePeriod rwrwr-": 1,
+                        "MaxBitRate rwrwr-": 2048,
+                        "MaxQuality rwrwr-": 10,
+                        "MinQuality rwrwr-": 0,
+                        "Profile rwrwr-": "High",
+                        "Quality rwrwr-": 8,
+                        "RateControl rwrwr-": "mbr",
+                        "VBR": {
+                            "ChangePos rwrwr-": 80,
+                            "MotionAQStr rwrwr-": 0,
+                            "StaticTime rwrwr-": 0
+                        }
+                    },
+                    "MJPEG": {
+                        "MaxBitRate rwrwr-": 4096,
+                        "Quality rwrwr-": 5
+                    },
+                    "Name rwrwr-": "stream 2",
+                    "Resolution rwrwr-": "1920x1080"
+                },
+                "Count r-r-r-": 2,
+                "MaxCount r-r-r-": 2
+            }
+        },
+        "Count r-r-r-": 1,
+        "MaxCount r-r-r-": 1
+    }
+}

@@ -1,0 +1,5 @@
+Series=TC
+Model=TC500
+Device=IP Camera
+Version=1.0.61
+MinorVersion=24.06.04

@@ -1,0 +1,190 @@
+#!/bin/sh
+# chkconfig: 2345 95 05
+# Run the factory env
+#
+
+start() {
+	count=0
+	while [ $count -lt 10 ]
+	do
+		if [ -S /tmp/ipc-system ]; then
+			break;
+		fi
+		sleep 1
+		count=`expr \( $count + 1 \)`
+		echo "S95factory: wait /tmp/ipc-system ready... [$count]"
+	done
+
+	# exit if ipc is still not exist.
+	if [ ! -S /tmp/ipc-system ]; then
+		echo "S95factory: /tmp/ipc-system is not exist!!!"
+		exit 1
+	fi
+
+	# if run hardware check mode
+	if [ -f /tmp/hw_chk_mode ]; then
+		echo "S95factory: hardware check mode!"
+
+		# enable access permission to cgi2 cgi
+		touch /tmp/no_restrict_uri
+
+		# unlock root account
+		/usr/bin/passwd -u root
+		sync
+
+		# force enabling debug mode
+		diag action=update key=Custom.DebugMode boolval=true
+		sleep 1
+
+		# set profile 1
+		diag action=update key=VideoSource.0.VideoProfile.0.Resolution strval=2880x1620
+		diag action=update key=VideoSource.0.VideoProfile.0.FPS intval=15
+		diag action=update key=VideoSource.0.VideoProfile.0.H264.RateControl strval=cbr
+		diag action=update key=VideoSource.0.VideoProfile.0.H264.MaxBitRate intval=8192
+		sleep 1
+
+		# set profile 2
+		diag action=update key=VideoSource.0.VideoProfile.1.Resolution strval=1920x1080
+		diag action=update key=VideoSource.0.VideoProfile.1.FPS intval=15
+		diag action=update key=VideoSource.0.VideoProfile.1.H264.RateControl strval=cbr
+		diag action=update key=VideoSource.0.VideoProfile.1.H264.BitRate intval=2048
+		sleep 1
+
+		# disable other functions
+		diag action=update key=Custom.Activated boolval=false
+		diag action=update key=Custom.Edge.Mode intval=0
+		diag action=update key=VideoSource.0.Motion.0.Enabled boolval=false
+		diag action=update key=VideoSource.0.Motion.1.Enabled boolval=false
+		diag action=update key=VideoSource.0.Motion.2.Enabled boolval=false
+		diag action=update key=VideoSource.0.Motion.3.Enabled boolval=false
+		diag action=update key=VideoSource.0.Motion.Tamper.Enabled boolval=false
+		diag action=update key=AudioSource.0.SoundDetect.Enabled boolval=false
+		sleep 1
+
+		# reset RTSP path name
+		diag action=update key=Network.Streaming.RTSP.Path.0.AccessName strval=1
+		diag action=update key=Network.Streaming.RTSP.Path.1.AccessName strval=2
+
+		# disable RTSP auth
+		diag action=update key=Network.Streaming.RTSP.Authentication strval=none
+	else
+		# if factory_mode is not exist in product env, set factory_mode to 1 as default
+		FACT_MODE=`product_printenv factory_mode|cut -d = -f 2`
+		if [ "$FACT_MODE" == "" ]; then
+			product_setenv factory_mode 1
+		fi
+
+		# check factory mode
+		FACT_MODE=`product_printenv factory_mode|cut -d = -f 2`
+		if [ "$FACT_MODE" == "0" ]; then
+			echo "S95factory: factory mode off"
+
+			# lock root account
+			/usr/bin/passwd -l root
+			sync
+
+			# check activate
+			ACTIVATE=`diag action=list key=Custom.Activated`
+			if [ "$ACTIVATE" == "true" ]; then
+				rm -f /data/app/burnin_test_nas_ip
+				diag action=update json='{"Storage": {"1": {"NetDiskInfo": {"Hostname": "", "Username": "", "Password": "", "ShareFolderPath": ""}}}}'
+				sync
+			fi
+
+			# check burnin mode
+			if [ -f /data/app/burnin_test_nas_ip ]; then
+				echo "S95factory: burnin mode on"
+				/bin/start_burnin.sh &
+			fi
+		elif [ "$FACT_MODE" == "1" ]; then
+			echo "S95factory: factory mode on!!!"
+
+			# set factory mode on
+			touch /tmp/factory_mode
+			# enable access permission to cgi2 cgi
+			touch /tmp/no_restrict_uri
+			# disable isp_check_cb
+			touch /tmp/isp_check_stop
+			# force to load isp_fac.cfg
+			touch /tmp/force_isp_fac
+
+			# unlock root account
+			/usr/bin/passwd -u root
+			sync
+
+			# enable HTTP
+			diag action=update key=Network.HTTP.Enabled boolval=true
+			sleep 3
+
+			diag action=update key=Network.UPnP.Enabled boolval=false
+			sleep 0.5
+
+			diag action=update key=Network.0.BootProto strval=static
+			sleep 0.5
+
+			# force enabling debug mode
+			diag action=update key=Custom.DebugMode boolval=true
+
+			# disable other functions
+			diag action=update key=Custom.Activated boolval=false
+			diag action=update key=Custom.Edge.Mode intval=0
+			diag action=update key=VideoSource.0.Motion.0.Enabled boolval=false
+			diag action=update key=VideoSource.0.Motion.1.Enabled boolval=false
+			diag action=update key=VideoSource.0.Motion.2.Enabled boolval=false
+			diag action=update key=VideoSource.0.Motion.3.Enabled boolval=false
+			diag action=update key=VideoSource.0.Motion.Tamper.Enabled boolval=false
+			diag action=update key=AudioSource.0.SoundDetect.Enabled boolval=false
+			diag action=update key=VideoSource.0.Overlay.Text.DateEnabled boolval=false
+			diag action=update key=VideoSource.0.Overlay.Text.TimeEnabled boolval=false
+			diag action=update key=VideoSource.0.Overlay.Text.TextEnabled boolval=false
+			# set SHDR off for adjusting lens focus
+			diag action=update key=VideoSource.0.ISP.HDREnabled boolval=false
+			sleep 1
+
+			# set profile 1
+			diag action=update key=VideoSource.0.VideoProfile.0.Resolution strval=2880x1620
+			diag action=update key=VideoSource.0.VideoProfile.0.FPS intval=15
+			diag action=update key=VideoSource.0.VideoProfile.0.H264.RateControl strval=cbr
+			diag action=update key=VideoSource.0.VideoProfile.0.H264.MaxBitRate intval=8192
+			sleep 1
+
+			# set profile 2
+			diag action=update key=VideoSource.0.VideoProfile.1.Resolution strval=1920x1080
+			diag action=update key=VideoSource.0.VideoProfile.1.FPS intval=15
+			diag action=update key=VideoSource.0.VideoProfile.1.H264.RateControl strval=cbr
+			diag action=update key=VideoSource.0.VideoProfile.1.H264.BitRate intval=2048
+			sleep 1
+
+			# disable RTSP auth
+			diag action=update key=Network.Streaming.RTSP.Authentication strval=none
+			sleep 0.5
+
+			# reset account for factory mode
+			diag action=update key=Generic.User.0.Username strval=admin
+			diag action=update key=Generic.User.0.Password strval=admin
+
+			# update GP factory_mode
+			REQUEST_METHOD="GET" QUERY_STRING="action=update&factoryMode=1" /www/cgi2/factory.cgi > /dev/null
+		fi
+	fi
+}
+
+stop() {
+	echo ""
+}
+
+case "$1" in
+start)
+	start
+	;;
+stop)
+	stop
+	;;
+restart|reload)
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

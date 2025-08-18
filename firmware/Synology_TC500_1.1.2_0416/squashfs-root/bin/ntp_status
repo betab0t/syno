@@ -1,0 +1,35 @@
+#!/bin/sh
+OUTPUT_FILE=/tmp/ntp_sync_status
+HISTORY_FILE=/tmp/ntp_update_history
+UPDATED_FILE=/tmp/time_updated
+NOW=$(date "+%Y-%m-%d %H:%M:%S")
+#NOW=$(TZ=UTC-8 date "+%Y-%m-%d %H:%M:%S")
+
+if [ -f $HISTORY_FILE ]; then
+	lsum=$(awk '{print NR}' $HISTORY_FILE | tail -n1)
+	if [ $lsum -ge 500 ]; then
+		sed -i '500,$d' $HISTORY_FILE
+	fi
+	sed -i "1i$NOW, $0 $1" $HISTORY_FILE
+else
+	echo "$NOW, $0 $1" > $HISTORY_FILE
+fi
+
+if [ "$1" = "step" ] ; then
+	touch $UPDATED_FILE
+	logger -t ntpd "action=step, stratum=$stratum interval=$poll_interval offset=$offset"
+elif [ "$1" = "stratum" ] ; then
+	touch $UPDATED_FILE
+	logger -t ntpd "action=stratum, stratum=$stratum interval=$poll_interval offset=$offset"
+fi
+
+if [ "$1" = "step" ] || [ "$1" = "stratum" ] || [ "$1" = "periodic" ]; then
+	echo "$NOW: $1" > $OUTPUT_FILE
+	hwrtc_set
+elif [ "$1" = "unsync" ]; then
+	rm $OUTPUT_FILE
+fi
+
+exit 0
+#periodic, unsync, stratum, step
+

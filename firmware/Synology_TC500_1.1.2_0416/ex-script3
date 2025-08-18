@@ -1,0 +1,11 @@
+#!/bin/sh
+# [DESC] fdt
+# nvt-evb.bin
+# fdt: mtd1
+
+if [ -f /tmp/need_update_fdt ]; then
+	echo -e "update fdt..."
+	flash_eraseall /dev/mtd1 && nandwrite -p /dev/mtd1 $1
+	rm -f /tmp/need_update_dft
+fi
+

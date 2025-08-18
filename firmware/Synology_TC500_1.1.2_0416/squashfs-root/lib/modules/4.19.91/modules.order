@@ -1,0 +1,17 @@
+kernel/fs/nls/nls_iso8859-1.ko
+kernel/fs/configfs/configfs.ko
+kernel/fs/fat/fat.ko
+kernel/fs/fat/vfat.ko
+kernel/fs/fat/msdos.ko
+kernel/drivers/video/fbdev/core/fb.ko
+kernel/drivers/video/fbdev/core/cfbfillrect.ko
+kernel/drivers/video/fbdev/core/cfbcopyarea.ko
+kernel/drivers/video/fbdev/core/cfbimgblt.ko
+kernel/drivers/net/phy/libphy.ko
+kernel/drivers/net/phy/fixed_phy.ko
+kernel/drivers/net/phy/na51055_phy.ko
+kernel/drivers/net/ethernet/novatek/na51089/ntkimethmac.ko
+kernel/drivers/net/mii.ko
+kernel/drivers/of/of_mdio.ko
+kernel/drivers/iio/adc/nvt_adc.ko
+kernel/net/bpfilter/bpfilter.ko

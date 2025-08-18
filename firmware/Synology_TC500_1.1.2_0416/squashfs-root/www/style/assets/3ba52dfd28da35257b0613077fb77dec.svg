@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="144px" viewBox="0 0 24 144" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>_Asset/SVG/bt_radio</title>
+    <defs>
+        <circle id="path-1" cx="7" cy="7" r="5"></circle>
+        <circle id="path-3" cx="7" cy="7" r="5"></circle>
+        <circle id="path-5" cx="7" cy="7" r="5"></circle>
+    </defs>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bt_radio">
+            <g id="Group" stroke="#FFFFFF" stroke-opacity="0.6">
+                <g id="new">
+                    <circle cx="12" cy="12" r="6.5"></circle>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 24.000000)" stroke="#FFFFFF" stroke-opacity="0.6">
+                <g id="new">
+                    <circle cx="12" cy="12" r="6.5"></circle>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 72.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <circle id="Oval" stroke="#00A2FF" cx="7" cy="7" r="6.5"></circle>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Oval" fill="#00A2FF" xlink:href="#path-1"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 96.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <circle id="Oval" stroke="#00A2FF" cx="7" cy="7" r="6.5"></circle>
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Oval" fill="#00A2FF" xlink:href="#path-3"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 120.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <circle id="Oval" stroke-opacity="0.3" stroke="#00A2FF" cx="7" cy="7" r="6.5"></circle>
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Oval" fill="#00A2FF" opacity="0.3" xlink:href="#path-5"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 48.000000)" stroke="#FFFFFF" stroke-opacity="0.2">
+                <g id="new">
+                    <circle cx="12" cy="12" r="6.5"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

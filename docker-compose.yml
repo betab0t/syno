@@ -1,0 +1,12 @@
+services:
+  syno:
+    build: .
+    hostname: TC500_C4
+    ports:
+      - 0.0.0.0:80:80/tcp # webd
+      - 0.0.0.0:443:443/tcp # webd
+      - 0.0.0.0:1234:1234/tcp # gdb server
+      - 0.0.0.0:23:23/tcp # telnetd
+    volumes:
+      - ./share/:/host:rw
+    command: tail -f /dev/null

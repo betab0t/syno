@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="216px" viewBox="0 0 24 216" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>_Asset/SVG/bt_checkbox</title>
+    <defs>
+        <rect id="path-1" x="2" y="5.5" width="10" height="3" rx="1.5"></rect>
+        <rect id="path-3" x="2" y="5.5" width="10" height="3" rx="1.5"></rect>
+        <rect id="path-5" x="2" y="5.5" width="10" height="3" rx="1.5"></rect>
+    </defs>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bt_checkbox">
+            <g id="Group" stroke="#FFFFFF" stroke-opacity="0.6">
+                <g id="new">
+                    <rect x="5.5" y="5.5" width="13" height="13" rx="2"></rect>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 24.000000)" stroke="#FFFFFF" stroke-opacity="0.6">
+                <g id="new">
+                    <rect x="5.5" y="5.5" width="13" height="13" rx="2"></rect>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 48.000000)" stroke="#FFFFFF" stroke-opacity="0.2">
+                <g id="new">
+                    <rect x="5.5" y="5.5" width="13" height="13" rx="2"></rect>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 72.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill="#00A2FF" x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <path d="M11.0992106,3.2927811 L5.24230344,9.14804719 L5.24230344,9.14804719 L3.06638297,6.96335716 C2.67664485,6.57204828 2.04348115,6.57077493 1.65217227,6.96051306 C1.65158468,6.96109828 1.65099783,6.96168424 1.6504117,6.96227093 L1.29221872,7.32080567 C0.9023497,7.71172149 0.902500594,8.34462645 1.29255597,8.73535632 L4.53519665,11.977997 C4.92572095,12.3685213 5.55888593,12.3685213 5.94941022,11.977997 L12.8675477,5.05985957 C13.2580719,4.66933528 13.2580719,4.0361703 12.8675477,3.64564601 C12.867062,3.64516034 12.8665758,3.64467517 12.8660892,3.6441905 L12.5118666,3.29142467 C12.1211472,2.90231219 11.489182,2.902919 11.0992106,3.2927811 Z" id="Page-1" fill="#25292E" transform="translate(7.080781, 7.636216) rotate(-360.000000) translate(-7.080781, -7.636216) "></path>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 144.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill="#00A2FF" x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Rectangle" fill="#25292E" xlink:href="#path-1"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 168.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill="#00A2FF" x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Rectangle" fill="#25292E" xlink:href="#path-3"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 192.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill-opacity="0.4" fill="#00A2FF" x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Rectangle" fill="#25292E" xlink:href="#path-5"></use>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 96.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill="#00A2FF" x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <path d="M11.0992106,3.2927811 L5.24230344,9.14804719 L5.24230344,9.14804719 L3.06638297,6.96335716 C2.67664485,6.57204828 2.04348115,6.57077493 1.65217227,6.96051306 C1.65158468,6.96109828 1.65099783,6.96168424 1.6504117,6.96227093 L1.29221872,7.32080567 C0.9023497,7.71172149 0.902500594,8.34462645 1.29255597,8.73535632 L4.53519665,11.977997 C4.92572095,12.3685213 5.55888593,12.3685213 5.94941022,11.977997 L12.8675477,5.05985957 C13.2580719,4.66933528 13.2580719,4.0361703 12.8675477,3.64564601 C12.867062,3.64516034 12.8665758,3.64467517 12.8660892,3.6441905 L12.5118666,3.29142467 C12.1211472,2.90231219 11.489182,2.902919 11.0992106,3.2927811 Z" id="Page-1" fill="#25292E" transform="translate(7.080781, 7.636216) rotate(-360.000000) translate(-7.080781, -7.636216) "></path>
+                </g>
+            </g>
+            <g id="Group" transform="translate(0.000000, 120.000000)">
+                <g id="new" transform="translate(5.000000, 5.000000)">
+                    <rect id="Rectangle" fill-opacity="0.4" fill="#00A2FF" transform="translate(7.000000, 7.000000) rotate(-360.000000) translate(-7.000000, -7.000000) " x="0" y="0" width="14" height="14" rx="2"></rect>
+                    <path d="M11.0992106,3.2927811 L5.24230344,9.14804719 L5.24230344,9.14804719 L3.06638297,6.96335716 C2.67664485,6.57204828 2.04348115,6.57077493 1.65217227,6.96051306 C1.65158468,6.96109828 1.65099783,6.96168424 1.6504117,6.96227093 L1.29221872,7.32080567 C0.9023497,7.71172149 0.902500594,8.34462645 1.29255597,8.73535632 L4.53519665,11.977997 C4.92572095,12.3685213 5.55888593,12.3685213 5.94941022,11.977997 L12.8675477,5.05985957 C13.2580719,4.66933528 13.2580719,4.0361703 12.8675477,3.64564601 C12.867062,3.64516034 12.8665758,3.64467517 12.8660892,3.6441905 L12.5118666,3.29142467 C12.1211472,2.90231219 11.489182,2.902919 11.0992106,3.2927811 Z" id="Page-1" fill="#25292E" transform="translate(7.080781, 7.636216) rotate(-360.000000) translate(-7.080781, -7.636216) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

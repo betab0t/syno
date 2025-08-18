@@ -1,0 +1,18 @@
+#!/bin/sh
+# System Daemon Run
+echo "nvtapp" > /proc/nvt_info/bootts
+
+inetd
+
+#DeviceDiscovery -d &
+echo "nvtapp" > /proc/nvt_info/bootts
+
+# patch start.
+# for ISP tool
+#echo "run isp_demon"
+#/usr/bin/isp_demon
+# patch end.
+
+# disable childless pll
+echo d > /proc/nvt_info/nvt_clk/clk_childless
+

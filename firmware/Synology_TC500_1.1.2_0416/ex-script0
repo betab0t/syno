@@ -1,0 +1,20 @@
+#!/bin/sh
+# [DESC] linux
+# uImage
+# kernel0: mtd6
+# kernel1: mtd8
+
+free
+
+target_boot=`uboot_printenv target_boot`
+if [ "${target_boot}" == "target_boot=1" ]; then 
+
+echo "nandwrite kernel $1 to /dev/mtd6"
+flash_eraseall /dev/mtd6 && nandwrite -p /dev/mtd6 $1
+
+else
+
+echo "nandwrite kernel $1 to /dev/mtd8"
+flash_eraseall /dev/mtd8 && nandwrite -p /dev/mtd8 $1
+
+fi

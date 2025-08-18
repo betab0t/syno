@@ -1,0 +1,57 @@
+{
+	"discoverable": true,
+	"scopes": {
+		"fixed": [
+			"onvif://www.onvif.org/Profile/Streaming",
+			"onvif://www.onvif.org/type/video_encoder",
+			"onvif://www.onvif.org/type/audio_encoder",
+			"onvif://www.onvif.org/hardware/TC500",
+			"onvif://www.onvif.org/manufacturer/Synology"
+		],
+		"configurable": [
+			"onvif://www.onvif.org/name/Synology%20TC500"
+		]
+	},
+	"zeroconfig": true,
+	"ntp_from_dhcp": false,
+	"ntp_enable": false,
+	"dns_from_dhcp": true,
+	"dns_search": [],
+	"profiles": [
+		{
+			"token": "profile1",
+			"name": "profile1",
+			"fixed": true,
+			"vsrc": "vsrc1",
+			"venc": "venc1",
+			"asrc": "asrc1",
+			"aenc": "aenc1"
+		},
+		{
+			"token": "profile2",
+			"name": "profile2",
+			"fixed": true,
+			"vsrc": "vsrc1",
+			"venc": "venc2",
+			"asrc": "asrc1",
+			"aenc": "aenc1"
+		}
+	],
+	"configurations": {
+		"vsrc1": {
+			"name": "video source 1"
+		},
+		"asrc1": {
+			"name": "audio source 1"
+		},
+		"venc1": {
+			"name": "video encoder 1"
+		},
+		"venc2": {
+			"name": "video encoder 2"
+		},
+		"aenc1": {
+			"name": "audio encoder 1"
+		}
+	}
+}
