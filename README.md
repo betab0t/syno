@@ -1,6 +1,6 @@
 # Synology TC500 Format String Bug
 
-Analysis of a format string bug in Synology TC/BC500 IP cameras found by Baptiste Moine.
+Analysis of a format string bug in Synology TC/BC500 IP cameras found by Baptiste Moine (@Synaktiv) and Sam Hinwood(@InfoSect).
 
 
 ## Setup
@@ -65,4 +65,5 @@ sh -c 'echo synodebug:synodebug|chpasswd;telnetd'
 
 * https://archive.synology.com/download/Firmware/Camera/TC500
 
+* https://blog.infosectcbr.com.au/2025/08/01/exploiting-the-synology-tc500-at-pwn2own-ireland-2024/
 
